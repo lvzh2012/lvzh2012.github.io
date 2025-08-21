@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us"
+<html lang="en"
   x-data
   :class="$store.darkMode.class()"
   :data-theme="$store.darkMode.theme()">
@@ -9,7 +9,7 @@
     <title>
 
 
-All Tags | My New Hugo Site</title>
+All Tags | Hugo Theme Dream title</title>
 
     
 
@@ -17,8 +17,8 @@ All Tags | My New Hugo Site</title>
 
 
 
-<meta name="author" content="" />
-<meta name="description" content="" />
+<meta name="author" content="梦想" />
+<meta name="description" content="我的梦想概念" />
 
 
 
@@ -26,9 +26,10 @@ All Tags | My New Hugo Site</title>
 
 
 <meta property="og:url" content="http://localhost:1313/tags/">
-  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:site_name" content="Hugo Theme Dream title">
   <meta property="og:title" content="Tags">
-  <meta property="og:locale" content="en_us">
+  <meta property="og:description" content="我的梦想概念">
+  <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 
 
@@ -36,6 +37,7 @@ All Tags | My New Hugo Site</title>
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Tags">
+  <meta name="twitter:description" content="我的梦想概念">
 
 
 
@@ -67,10 +69,21 @@ All Tags | My New Hugo Site</title>
     <section class="flex items-center gap-4">
       <div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title="Flip it!">
         <div class="h-10 rounded-full">
-          <img src="/" alt="" />
+          <img src="/img/avatar.jpg" alt="Hugo Theme Dream" />
         </div>
       </div>
 
+      
+      <div>
+        
+        <a href="http://localhost:1313/" class="text-lg font-semibold cursor-pointer">
+          Hugo Theme Dream
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">motto</div>
+        
+      </div>
       
     </section>
 
@@ -236,8 +249,8 @@ All Tags | My New Hugo Site</title>
     
     
     <picture>
-      <source srcset="/images/default3_hu_599e07ea93afc07d.webp" type="image/webp" />
-      <img src="/images/default3.jpg" alt="/images/default3.jpg" />
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
     </picture>
     
   </figure>
@@ -297,17 +310,13 @@ All Tags | My New Hugo Site</title>
 
   <div>
   
-  <p>© 2025 My New Hugo Site</p>
+  <p>
+    © 2025 Hugo Theme Dream title
+  </p>
   
 
   
-  <p class="text-sm">
-    🌱
-    <span class="text-base-content/60">
-      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
-      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
-    >
-  </p>
+  <p>我是 foot 文本</p>
   
 </div>
 
@@ -360,17 +369,13 @@ All Tags | My New Hugo Site</title>
 
   <div>
   
-  <p>© 2025 My New Hugo Site</p>
+  <p>
+    © 2025 Hugo Theme Dream title
+  </p>
   
 
   
-  <p class="text-sm">
-    🌱
-    <span class="text-base-content/60">
-      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
-      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
-    >
-  </p>
+  <p>我是 foot 文本</p>
   
 </div>
 
@@ -409,8 +414,8 @@ All Tags | My New Hugo Site</title>
     </div>
 
     <script>
-  window.lightTheme =  null 
-  window.darkTheme =  null 
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
 </script>
 
 

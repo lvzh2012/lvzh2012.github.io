@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en-us"
+<html lang="en"
   x-data
   :class="$store.darkMode.class()"
   :data-theme="$store.darkMode.theme()">
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Post | My New Hugo Site</title>
+    <title>My First Post | Hugo Theme Dream title</title>
 
     
 
@@ -27,10 +27,10 @@
 
 
 <meta property="og:url" content="http://localhost:1313/posts/my-first-post/">
-  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:site_name" content="Hugo Theme Dream title">
   <meta property="og:title" content="My First Post">
   <meta property="og:description" content="Cut out summary from your post content here.">
-  <meta property="og:locale" content="en_us">
+  <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-08-21T11:20:53+08:00">
@@ -91,10 +91,21 @@
     <section class="flex items-center gap-4">
       <div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title="Flip it!">
         <div class="h-10 rounded-full">
-          <img src="/" alt="" />
+          <img src="/img/avatar.jpg" alt="Hugo Theme Dream" />
         </div>
       </div>
 
+      
+      <div>
+        
+        <a href="http://localhost:1313/" class="text-lg font-semibold cursor-pointer">
+          Hugo Theme Dream
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">motto</div>
+        
+      </div>
       
     </section>
 
@@ -268,7 +279,7 @@
   <span itemprop="author" itemscope itemtype="https://schema.org/Person">
   
     
-      <a itemprop="url" href="https://picsum.photos/200/300/?blur=2" target="_blank">
+      <a itemprop="url" href="https://fastly.picsum.photos/id/870/200/300.jpg?blur=2" target="_blank">
         <span itemprop="name">zhenhua.lv</span>
       </a>
     
@@ -343,17 +354,13 @@
 
   <div>
   
-  <p>© 2025 My New Hugo Site</p>
+  <p>
+    © 2025 Hugo Theme Dream title
+  </p>
   
 
   
-  <p class="text-sm">
-    🌱
-    <span class="text-base-content/60">
-      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
-      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
-    >
-  </p>
+  <p>我是 foot 文本</p>
   
 </div>
 
@@ -406,17 +413,13 @@
 
   <div>
   
-  <p>© 2025 My New Hugo Site</p>
+  <p>
+    © 2025 Hugo Theme Dream title
+  </p>
   
 
   
-  <p class="text-sm">
-    🌱
-    <span class="text-base-content/60">
-      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
-      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
-    >
-  </p>
+  <p>我是 foot 文本</p>
   
 </div>
 
@@ -455,8 +458,8 @@
     </div>
 
     <script>
-  window.lightTheme =  null 
-  window.darkTheme =  null 
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
 </script>
 
 

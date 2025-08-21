@@ -4,7 +4,7 @@ date: 2025-08-21T11:20:53+08:00
 lastmod: 2025-08-21T11:20:53+08:00
 author: zhenhua.lv
 # avatar: /author.jpg
-authorlink: https://picsum.photos/200/300/?blur=2
+authorlink: https://fastly.picsum.photos/id/870/200/300.jpg?blur=2
 # cover: /img/cover.jpg
 # images:
 #   - /img/cover.jpg
