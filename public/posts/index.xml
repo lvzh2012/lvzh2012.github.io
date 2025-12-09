@@ -6,14 +6,14 @@
     <description>Recent content in Posts on Hugo Theme Dream title</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 21 Aug 2025 11:20:53 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 09 Dec 2025 17:58:55 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
-      <pubDate>Thu, 21 Aug 2025 11:20:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
-      <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
+      <title>LLDB</title>
+      <link>http://localhost:1313/posts/lldb/</link>
+      <pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate>
+      <guid>http://localhost:1313/posts/lldb/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
     </item>
   </channel>
 </rss>
