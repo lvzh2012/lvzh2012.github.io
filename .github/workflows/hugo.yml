@@ -77,6 +77,11 @@ jobs:
           key: hugo-${{ github.run_id }}
           restore-keys:
             hugo-
+      - name: Remove theme example files
+        run: |
+          rm -f themes/demius/content/posts/theme-configuration-guide.md || true
+          rm -f themes/demius/content/about.md || true
+          rm -f themes/demius/content/_index.md || true
       - name: Build the site
         run: |
           hugo \
