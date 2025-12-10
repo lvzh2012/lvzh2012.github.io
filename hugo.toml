@@ -59,6 +59,14 @@ stickyHeader = true            # 页面下滑时导航栏固定在顶部
   title = "zhenhua.lv"         # 大图标题
   subtitle = "Talk is cheap, Show me the code."  # 大图副标题
 
+# 公告配置 - 禁用公告功能
+[params.announcement]
+  enable = false               # 禁用公告栏
+
+# 侧边栏公告组件配置 - 禁用侧边栏公告
+[params.aside]
+  showAnnouncement = false     # 禁用侧边栏公告组件
+
 # rss = true
 
 # utterancesRepo = ""
