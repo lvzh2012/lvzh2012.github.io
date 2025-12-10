@@ -79,9 +79,12 @@ jobs:
             hugo-
       - name: Remove theme example files
         run: |
+          echo "Removing theme example files..."
           rm -f themes/demius/content/posts/theme-configuration-guide.md || true
           rm -f themes/demius/content/about.md || true
           rm -f themes/demius/content/_index.md || true
+          find themes/demius/content -type f -name "*.md" -exec rm -f {} \; || true
+          echo "Theme example files removed"
       - name: Build the site
         run: |
           hugo \
