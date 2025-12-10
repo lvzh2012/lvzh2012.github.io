@@ -1,6 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Talk is cheap, Show me the code.</title><link>https://lvzh2012.github.io/posts/</link><description>Recent content in Posts on Talk is cheap, Show me the code.</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 09 Dec 2025 17:58:55 +0800</lastBuildDate><atom:link href="https://lvzh2012.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>LLDB</title><link>https://lvzh2012.github.io/posts/lldb/</link><pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate><guid>https://lvzh2012.github.io/posts/lldb/</guid><description>&lt;h1 id="lldb-调试工具">LLDB 调试工具&lt;/h1>
-&lt;p>LLDB 是 LLVM 项目的一部分，是一个强大的调试器，用于调试 C、C++、Objective-C 和 Swift 程序。&lt;/p>
-&lt;h2 id="基本使用">基本使用&lt;/h2>
-&lt;p>LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复程序中的问题。&lt;/p></description></item><item><title>Demius 主题配置指南</title><link>https://lvzh2012.github.io/posts/theme-configuration-guide/</link><pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate><guid>https://lvzh2012.github.io/posts/theme-configuration-guide/</guid><description>&lt;h2 id="-配置说明">📦 配置说明&lt;/h2>
-&lt;h3 id="使用前准备">使用前准备&lt;/h3>
-&lt;p>&lt;strong>重要提示：&lt;/strong> 本仓库是 Demius 主题的完整源码仓库，包含了一些与主题使用无关的文件，这些文件是为了让 Hugo 官方主题仓库定时拉取而创建的。在使用主题前，请删除以下文件：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Talk is cheap, Show me the code.</title>
+    <link>https://lvzh2012.github.io/posts/</link>
+    <description>Recent content in Posts on Talk is cheap, Show me the code.</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 10 Dec 2025 11:45:39 +0800</lastBuildDate>
+    <atom:link href="https://lvzh2012.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Swift Codable Macro</title>
+      <link>https://lvzh2012.github.io/posts/swift-codable-macro/</link>
+      <pubDate>Wed, 10 Dec 2025 11:45:39 +0800</pubDate>
+      <guid>https://lvzh2012.github.io/posts/swift-codable-macro/</guid>
+      <description>&lt;h1 id=&#34;codablemacro&#34;&gt;CodableMacro&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;CodableMacro&lt;/code&gt; 是一个轻量级的 Swift Macro 库，旨在简化 Swift 中 &lt;code&gt;Codable&lt;/code&gt; 协议的实现。通过使用宏，你可以极大地减少处理 JSON 解析时的样板代码，轻松处理自定义键名映射和默认值。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-特性-features&#34;&gt;✨ 特性 (Features)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;自动实现 Codable&lt;/strong&gt;: 使用 &lt;code&gt;@CodableModel&lt;/code&gt; 宏自动生成 &lt;code&gt;init(from: Decoder)&lt;/code&gt;、&lt;code&gt;encode(to: Encoder)&lt;/code&gt; 和 &lt;code&gt;CodingKeys&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;自定义键名&lt;/strong&gt;: 使用 &lt;code&gt;@CKey(&amp;quot;json_key&amp;quot;)&lt;/code&gt; 宏轻松映射 JSON 中的字段名。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;默认值支持&lt;/strong&gt;: 使用 &lt;code&gt;@Default(value)&lt;/code&gt; 宏为属性指定默认值，当 JSON 中缺少字段或解析失败时自动使用默认值。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;便捷解码&lt;/strong&gt;: 提供 &lt;code&gt;.rk&lt;/code&gt; 命名空间扩展，支持直接从 &lt;code&gt;Data&lt;/code&gt; 或 JSON &lt;code&gt;String&lt;/code&gt; 解码。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-安装-installation&#34;&gt;📦 安装 (Installation)&lt;/h2&gt;&#xA;&lt;h3 id=&#34;swift-package-manager&#34;&gt;Swift Package Manager&lt;/h3&gt;&#xA;&lt;p&gt;在你的 &lt;code&gt;Package.swift&lt;/code&gt; 文件中添加依赖：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>LLDB</title>
+      <link>https://lvzh2012.github.io/posts/lldb/</link>
+      <pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate>
+      <guid>https://lvzh2012.github.io/posts/lldb/</guid>
+      <description>&lt;h1 id=&#34;lldb-调试工具&#34;&gt;LLDB 调试工具&lt;/h1&gt;&#xA;&lt;p&gt;LLDB 是 LLVM 项目的一部分，是一个强大的调试器，用于调试 C、C++、Objective-C 和 Swift 程序。&lt;/p&gt;&#xA;&lt;h2 id=&#34;基本使用&#34;&gt;基本使用&lt;/h2&gt;&#xA;&lt;p&gt;LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复程序中的问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Demius 主题配置指南</title>
+      <link>https://lvzh2012.github.io/posts/theme-configuration-guide/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lvzh2012.github.io/posts/theme-configuration-guide/</guid>
+      <description>&lt;h2 id=&#34;-配置说明&#34;&gt;📦 配置说明&lt;/h2&gt;&#xA;&lt;h3 id=&#34;使用前准备&#34;&gt;使用前准备&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;重要提示：&lt;/strong&gt; 本仓库是 Demius 主题的完整源码仓库，包含了一些与主题使用无关的文件，这些文件是为了让 Hugo 官方主题仓库定时拉取而创建的。在使用主题前，请删除以下文件：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
