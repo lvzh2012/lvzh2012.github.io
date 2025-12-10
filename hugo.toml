@@ -52,6 +52,13 @@ tocOpen = true                 # 文章目录默认展开
 pjax = true                    # 启用无刷新页面切换
 stickyHeader = true            # 页面下滑时导航栏固定在顶部
 
+# 主页大图配置
+[params.homeBigImage]
+  enable = true                # 是否启用主页大图功能
+  mode = "mode2"               # 大图模式：mode1（中间栏大图）或 mode2（全屏大图）
+  title = "zhenhua.lv"         # 大图标题
+  subtitle = "Talk is cheap, Show me the code."  # 大图副标题
+
 # rss = true
 
 # utterancesRepo = ""
