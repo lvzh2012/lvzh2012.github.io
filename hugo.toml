@@ -1,7 +1,7 @@
 baseurl = "https://lvzh2012.github.io/"
 defaultContentLanguage = "zh"
 languageCode = "zh-CN"
-title = "Talk is cheap, Show me the code."
+title = "lvzhenhua's blog"
 theme = "demius"
 hasCJKLanguage = true
 
@@ -34,8 +34,12 @@ enableEmoji = true
 
 [params]
 # Demius 主题配置
-author = "梦想"
-description = "我的梦想概念"
+author = "lvzhenhua"
+description = "随笔"
+
+# 图片资源配置
+[params.images]
+  avatar = "/img/avatar.jpg"  # 作者头像图片路径
 
 # 布局显示配置
 homeColumns = 3                # 首页中间栏引擎：1=单列|2=双列|3=瀑布流
