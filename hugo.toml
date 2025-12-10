@@ -859,7 +859,7 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
     # 模式一专属配置（中间栏大图）
     [params.homeBigImage.mode1]
       backgroundImage = "/img/index.png"   # 中间栏大图
-      arrowAnimation = false               # 是否显示导航箭头
+      arrowAnimation = true               # 是否显示导航箭头
       scrollSpeed = 500                    # 滚动速度
       cardAnimation = true                 # 是否启用卡片汇聚动画
       cardAnimationSpeed = "normal"        # 动画速度：slow, normal, fast
@@ -1084,11 +1084,16 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
   
   # 自定义内容
   custom = """
-    <div class="footer-links">
-      <a href="/about">关于</a>
-      <a href="/sitemap.xml">网站地图</a>
+    <div> 
+       😄😄😄
     </div>
   """
+  # custom = """
+  #   <div class="footer-links">
+  #     <a href="/about">关于</a>
+  #     <a href="/sitemap.xml">网站地图</a>
+  #   </div>
+  # """
 
   # 运行时间显示配置
   [params.footer.runningTime]
