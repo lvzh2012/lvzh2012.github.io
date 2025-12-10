@@ -2,7 +2,10 @@
 date = '2025-12-10T11:45:39+08:00'
 draft = false
 title = 'Swift Codable Macro'
-tags = ['Swift']
+tags = ['Swift'] 
+
+categories = ['Swift']
+
 +++
 
 # CodableMacro

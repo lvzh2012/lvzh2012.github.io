@@ -45,203 +45,203 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
     [menu.main.params]
       icon = "/img/icons/shouye.svg"         # 菜单图标路径
 
-  # 统计菜单（一级菜单，包含二级菜单）
-  [[menu.main]]
-    name = "统计"
-    url = "#"
-    weight = 2
-    identifier = "statistics"         # 用于二级菜单的父级标识
-    [menu.main.params]
-      icon = "/img/icons/tongji.svg"
-
-  # 归档（二级菜单，属于"统计"菜单）
-  [[menu.main]]
-    name = "归档"
-    url = "/posts/"
-    weight = 1
-    parent = "statistics"             # 指定父级菜单为"统计"
-    [menu.main.params]
-      icon = "/img/icons/blog.svg"
-
-  # 分类（二级菜单，属于"统计"菜单）
-  [[menu.main]]
+   [[menu.main]]
     name = "分类"
-    url = "/categories/"
+    url = "/tags/"
     weight = 2
-    parent = "statistics"             # 指定父级菜单为"统计"
+    # parent = "statistics"             # 指定父级菜单为"统计"
     [menu.main.params]
       icon = "/img/icons/fenlei.svg"
 
-  # 标签（二级菜单，属于"统计"菜单）
   [[menu.main]]
     name = "标签"
-    url = "/tags/"
-    weight = 3
-    parent = "statistics"             # 指定父级菜单为"统计"
+    url = "/categories/"
+    weight = 3            
     [menu.main.params]
       icon = "/img/icons/biaoqian.svg"
+
+  # 统计菜单（一级菜单，包含二级菜单）
+  # [[menu.main]]
+  #   name = "统计"
+  #   url = "#"
+  #   weight = 2
+  #   identifier = "statistics"         # 用于二级菜单的父级标识
+  #   [menu.main.params]
+  #     icon = "/img/icons/tongji.svg"
+
+  # 归档（二级菜单，属于"统计"菜单）
+  # [[menu.main]]
+  #   name = "归档"
+  #   url = "/posts/"
+  #   weight = 2
+  #   parent = "statistics"             # 指定父级菜单为"统计"
+  #   [menu.main.params]
+  #     icon = "/img/icons/blog.svg"
+
+  # 分类（二级菜单，属于"统计"菜单）
+ 
   
   # 数据（二级菜单，属于"统计"菜单）
-  [[menu.main]]
-    name = "数据"
-    url = "/data/"
-    weight = 4
-    parent = "statistics"             # 指定父级菜单为"统计"
-    [menu.main.params]
-      icon = "/img/icons/shuju.svg"
+  # [[menu.main]]
+  #   name = "数据"
+  #   url = "/data/"
+  #   weight = 4
+  #   parent = "statistics"             # 指定父级菜单为"统计"
+  #   [menu.main.params]
+  #     icon = "/img/icons/shuju.svg"
 
-  # 网友菜单（一级菜单，包含二级菜单）
-  [[menu.main]]
-    name = "网友"
-    url = "#"
-    weight = 3
-    identifier = "friends"              # 用于二级菜单的父级标识
-    [menu.main.params]
-      icon = "/img/icons/youlian.svg"   # 网友菜单图标路径（如果不存在会使用默认图标）
+  # # 网友菜单（一级菜单，包含二级菜单）
+  # [[menu.main]]
+  #   name = "网友"
+  #   url = "#"
+  #   weight = 3
+  #   identifier = "friends"              # 用于二级菜单的父级标识
+  #   [menu.main.params]
+  #     icon = "/img/icons/youlian.svg"   # 网友菜单图标路径（如果不存在会使用默认图标）
 
-  # 友链（二级菜单，属于"网友"菜单）
-  [[menu.main]]
-    name = "友链"
-    url = "/links/"
-    weight = 1
-    parent = "friends"                  # 指定父级菜单为"网友"
-    [menu.main.params]
-      icon = "/img/icons/youlian.svg"
+  # # 友链（二级菜单，属于"网友"菜单）
+  # [[menu.main]]
+  #   name = "友链"
+  #   url = "/links/"
+  #   weight = 1
+  #   parent = "friends"                  # 指定父级菜单为"网友"
+  #   [menu.main.params]
+  #     icon = "/img/icons/youlian.svg"
 
-  # 网友圈（二级菜单，属于"网友"菜单）
-  [[menu.main]]
-    name = "网友圈"
-    url = "/friends-circle/"
-    weight = 2
-    parent = "friends"                  # 指定父级菜单为"网友"
-    [menu.main.params]
-      icon = "/img/icons/youlian.svg"  # 网友圈菜单图标路径（如果不存在会使用默认图标）
+  # # 网友圈（二级菜单，属于"网友"菜单）
+  # [[menu.main]]
+  #   name = "网友圈"
+  #   url = "/friends-circle/"
+  #   weight = 2
+  #   parent = "friends"                  # 指定父级菜单为"网友"
+  #   [menu.main.params]
+  #     icon = "/img/icons/youlian.svg"  # 网友圈菜单图标路径（如果不存在会使用默认图标）
 
-  # 生活菜单（一级菜单，包含二级菜单）
-  [[menu.main]]
-    name = "生活"
-    url = "#"
-    weight = 4
-    identifier = "life"               # 用于二级菜单的父级标识
-    [menu.main.params]
-      icon = "/img/icons/shenghuo.svg"
+  # # 生活菜单（一级菜单，包含二级菜单）
+  # [[menu.main]]
+  #   name = "生活"
+  #   url = "#"
+  #   weight = 4
+  #   identifier = "life"               # 用于二级菜单的父级标识
+  #   [menu.main.params]
+  #     icon = "/img/icons/shenghuo.svg"
   
   # 相册（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "相册"
-    url = "/gallery/"
-    weight = 1
-    parent = "life"                   # 指定父级菜单为"生活"
-    [menu.main.params]
-      icon = "/img/icons/xiangce.svg"
-  
+  # [[menu.main]]
+  #   name = "相册"
+  #   url = "/gallery/"
+  #   weight = 1
+  #   parent = "life"                   # 指定父级菜单为"生活"
+  #   [menu.main.params]
+  #     icon = "/img/icons/xiangce.svg"
+  # 
   # 装备（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "装备"
-    url = "/gear/"
-    weight = 2
-    parent = "life"                   # 指定父级菜单为"生活"
-    [menu.main.params]
-      icon = "/img/icons/zhuangbei.svg"
-  
+  # [[menu.main]]
+  #   name = "装备"
+  #   url = "/gear/"
+  #   weight = 2
+  #   parent = "life"                   # 指定父级菜单为"生活"
+  #   [menu.main.params]
+  #     icon = "/img/icons/zhuangbei.svg"
+  # 
   # 说说（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "说说"
-    url = "/shuoshuo/"
-    weight = 3
-    parent = "life"                   # 指定父级菜单为"生活"
-    [menu.main.params]
-      icon = "/img/icons/shuoshuo.svg"
+  # [[menu.main]]
+  #   name = "说说"
+  #   url = "/shuoshuo/"
+  #   weight = 3
+  #   parent = "life"                   # 指定父级菜单为"生活"
+  #   [menu.main.params]
+  #     icon = "/img/icons/shuoshuo.svg"
   
-  # 愿望清单（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "愿望清单"
-    url = "/wishlist/"
-    weight = 4
-    parent = "life"                   # 指定父级菜单为"生活"
-    [menu.main.params]
-      icon = "/img/icons/yuanwang.svg"
+  # # 愿望清单（二级菜单，属于"生活"菜单）
+  # [[menu.main]]
+  #   name = "愿望清单"
+  #   url = "/wishlist/"
+  #   weight = 4
+  #   parent = "life"                   # 指定父级菜单为"生活"
+  #   [menu.main.params]
+  #     icon = "/img/icons/yuanwang.svg"
 
-  # 音乐星球（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "音乐星球"
-    url = "/music-planet/"
-    weight = 5
-    parent = "life"
-    [menu.main.params]
-      icon = "/img/icons/yinyue.svg"
+  # # 音乐星球（二级菜单，属于"生活"菜单）
+  # [[menu.main]]
+  #   name = "音乐星球"
+  #   url = "/music-planet/"
+  #   weight = 5
+  #   parent = "life"
+  #   [menu.main.params]
+  #     icon = "/img/icons/yinyue.svg"
 
-  # 追番星球（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "追番星球"
-    url = "/bangumi-planet/"
-    weight = 6
-    parent = "life"
-    [menu.main.params]
-      icon = "/img/icons/zhuifan.svg"
+  # # 追番星球（二级菜单，属于"生活"菜单）
+  # [[menu.main]]
+  #   name = "追番星球"
+  #   url = "/bangumi-planet/"
+  #   weight = 6
+  #   parent = "life"
+  #   [menu.main.params]
+  #     icon = "/img/icons/zhuifan.svg"
 
-  # 小说书单（二级菜单，属于"生活"菜单）
-  [[menu.main]]
-    name = "小说书单"
-    url = "/booklist/"
-    weight = 7
-    parent = "life"
-    [menu.main.params]
-      icon = "/img/icons/xiaoshuo.svg"
+  # # 小说书单（二级菜单，属于"生活"菜单）
+  # [[menu.main]]
+  #   name = "小说书单"
+  #   url = "/booklist/"
+  #   weight = 7
+  #   parent = "life"
+  #   [menu.main.params]
+  #     icon = "/img/icons/xiaoshuo.svg"
 
-  [[menu.main]]
-    name = "留言"
-    url = "/message/"
-    weight = 5
-    [menu.main.params]
-      icon = "/img/icons/liuyan.svg"
+  # [[menu.main]]
+  #   name = "留言"
+  #   url = "/message/"
+  #   weight = 5
+  #   [menu.main.params]
+  #     icon = "/img/icons/liuyan.svg"
 
-  [[menu.main]]
-    name = "关于"
-    identifier = "about"
-    weight = 6
-    [menu.main.params]
-      icon = "/img/icons/guanyu.svg"
+  # [[menu.main]]
+  #   name = "关于"
+  #   identifier = "about"
+  #   weight = 6
+  #   [menu.main.params]
+  #     icon = "/img/icons/guanyu.svg"
 
-  [[menu.main]]
-    name = "关于本站"
-    url = "/about/"
-    weight = 1
-    parent = "about"
-    [menu.main.params]
-      icon = "/img/icons/guanyu.svg"
+  # [[menu.main]]
+  #   name = "关于本站"
+  #   url = "/about/"
+  #   weight = 1
+  #   parent = "about"
+  #   [menu.main.params]
+  #     icon = "/img/icons/guanyu.svg"
 
-  [[menu.main]]
-    name = "支持清单"
-    url = "/supporters/"
-    weight = 2
-    parent = "about"
-    [menu.main.params]
-      icon = "/img/icons/zhichi.svg"
+  # [[menu.main]]
+  #   name = "支持清单"
+  #   url = "/supporters/"
+  #   weight = 2
+  #   parent = "about"
+  #   [menu.main.params]
+  #     icon = "/img/icons/zhichi.svg"
 
-  # 多级菜单示例
-  [[menu.main]]
-    name = "项目"
-    identifier = "projects"
-    weight = 7
-    [menu.main.params]
-      icon = "/img/icons/web.svg"
+  # # 多级菜单示例
+  # [[menu.main]]
+  #   name = "项目"
+  #   identifier = "projects"
+  #   weight = 7
+  #   [menu.main.params]
+  #     icon = "/img/icons/web.svg"
 
-  [[menu.main]]
-    name = "Web开发"
-    url = "https://example.com/"
-    weight = 1
-    parent = "projects"
-    [menu.main.params]
-      icon = "/img/icons/web.svg"
+  # [[menu.main]]
+  #   name = "Web开发"
+  #   url = "https://example.com/"
+  #   weight = 1
+  #   parent = "projects"
+  #   [menu.main.params]
+  #     icon = "/img/icons/web.svg"
 
-  [[menu.main]]
-    name = "移动应用"
-    url = "https://example.com/"
-    weight = 2
-    parent = "projects"
-    [menu.main.params]
-      icon = "/img/icons/shouji.svg"
+  # [[menu.main]]
+  #   name = "移动应用"
+  #   url = "https://example.com/"
+  #   weight = 2
+  #   parent = "projects"
+  #   [menu.main.params]
+  #     icon = "/img/icons/shouji.svg"
 
 # ===== 主题参数配置 =====
 [params]
@@ -249,24 +249,24 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
   grayscaleMode = false                     # 全站变灰模式（一键开启，适用于特殊纪念日等场景）
   
   # ===== 基础信息配置 =====
-  author = "Lvzhenhua"                      # 网站作者/所有者
-  description = "task is cheap, show me the code"  # 网站描述，用于SEO
+  author = "LvZhenHua"                      # 网站作者/所有者
+  description = "在0和1的世界里翱翔"  # 网站描述，用于SEO
   
   # ===== 布局显示配置 =====
-  homeColumns = 1                # 首页中间栏引擎：1=单列|2=双列|3=瀑布流
+  homeColumns = 1             # 首页中间栏引擎：1=单列|2=双列|3=瀑布流
   mainSections = ["posts"]                 # 首页主内容来源的 Section 列表（驱动卡片列表）
-  summaryLength = 120                      # 文章摘要截取长度(字符数)，用于列表摘要
+  summaryLength = 84                      # 文章摘要截取长度(字符数)，用于列表摘要
   
   # ===== 文章卡片透明背景模式 =====
   postCardTransparentMode = true          # 启用文章卡片透明背景模式（true=透明效果，false=默认背景）
   postCardTransparentType = "glass"        # 透明效果类型：glass（透明毛玻璃效果）或 full（全透明效果）
   
   # ===== 文章详情页透明背景模式 =====
-  postPageTransparentMode = false          # 启用文章详情页透明背景模式（true=透明效果，false=默认背景）
-  postPageTransparentType = "full"       # 透明效果类型：glass（透明毛玻璃效果）或 full（全透明效果）
+  postPageTransparentMode = true          # 启用文章详情页透明背景模式（true=透明效果，false=默认背景）
+  postPageTransparentType = "glass"       # 透明效果类型：glass（透明毛玻璃效果）或 full（全透明效果）
   
   # ===== 功能开关配置 =====
-  darkMode = true                          # 默认启用暗色模式，false为默认亮色
+  darkMode = false                          # 默认启用暗色模式，false为默认亮色
   tocOpen = true                           # 文章目录默认展开，false为默认折叠
   pjax = true                              # 启用无刷新页面切换，false为传统页面跳转
   stickyHeader = true                      # 页面下滑时导航栏固定在顶部，false为不固定
@@ -853,8 +853,8 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
     mode = "mode2"                         # 大图模式：mode1（中间栏大图）或 mode2（全屏大图）
     
     # 共用配置
-    title = "字·兮·书"                     # 大图标题
-    subtitle = "时间就是生命，Life is money，Money is life"  # 大图副标题
+    title = "ZHENHUA.LV"                     # 大图标题
+    subtitle = "隐忍 奋争"  # 大图副标题
     
     # 模式一专属配置（中间栏大图）
     [params.homeBigImage.mode1]
@@ -879,7 +879,7 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
  
   # ===== 图片资源配置 =====
   [params.images]
-    avatar = "/img/avatar.png"             # 作者头像图片路径
+    avatar = "/img/avatar.jpg"             # 作者头像图片路径
     defaultCover = "/img/default-cover.webp"  # 文章默认封面图片路径
     fallbackImage = "/img/404.jpg"         # 图片加载失败时的备用图片
     favicon = "/img/favicon.ico"           # 网站图标(favicon)

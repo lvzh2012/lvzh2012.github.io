@@ -2,9 +2,9 @@
 date = '2025-12-09T17:58:55+08:00'
 draft = false
 title = 'LLDB'
-tags = ['Debug']
+tags = ['调试']
 
-categories = ['Debug']
+categories = ['XCode调试']
 
 +++
 
