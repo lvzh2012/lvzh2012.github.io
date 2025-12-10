@@ -2,6 +2,7 @@
 date = '2025-12-09T17:58:55+08:00'
 draft = false
 title = 'LLDB'
+
 +++
 
 # LLDB 调试工具
@@ -37,3 +38,5 @@ LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复
 ## 更多信息
 
 更多关于 LLDB 的使用方法，请参考官方文档。
+
+[Apple lldb](https://developer.apple.com/library/archive/documentation/General/Conceptual/lldb-guide/chapters/Introduction.html)

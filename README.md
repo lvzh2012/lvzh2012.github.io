@@ -27,6 +27,7 @@ cd lvzh2012.github.io
 2. 启动开发服务器
 ```bash
 hugo server --buildDrafts
+hugo server -D
 ```
 
 3. 访问 http://localhost:1313
