@@ -22,12 +22,5 @@
       <guid>https://lvzh2012.github.io/posts/lldb/</guid>
       <description>&lt;h1 id=&#34;lldb-调试工具&#34;&gt;LLDB 调试工具&lt;/h1&gt;&#xA;&lt;p&gt;LLDB 是 LLVM 项目的一部分，是一个强大的调试器，用于调试 C、C++、Objective-C 和 Swift 程序。&lt;/p&gt;&#xA;&lt;h2 id=&#34;基本使用&#34;&gt;基本使用&lt;/h2&gt;&#xA;&lt;p&gt;LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复程序中的问题。&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>Demius 主题配置指南</title>
-      <link>https://lvzh2012.github.io/posts/theme-configuration-guide/</link>
-      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://lvzh2012.github.io/posts/theme-configuration-guide/</guid>
-      <description>&lt;h2 id=&#34;-配置说明&#34;&gt;📦 配置说明&lt;/h2&gt;&#xA;&lt;h3 id=&#34;使用前准备&#34;&gt;使用前准备&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;重要提示：&lt;/strong&gt; 本仓库是 Demius 主题的完整源码仓库，包含了一些与主题使用无关的文件，这些文件是为了让 Hugo 官方主题仓库定时拉取而创建的。在使用主题前，请删除以下文件：&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>
