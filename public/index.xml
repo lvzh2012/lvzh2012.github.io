@@ -1,33 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Home on Talk is cheap, Show me the code.</title>
-    <link>https://lvzh2012.github.io/</link>
-    <description>Recent content in Home on Talk is cheap, Show me the code.</description>
-    <generator>Hugo</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Wed, 10 Dec 2025 11:45:39 +0800</lastBuildDate>
-    <atom:link href="https://lvzh2012.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Swift Codable Macro</title>
-      <link>https://lvzh2012.github.io/posts/swift-codable-macro/</link>
-      <pubDate>Wed, 10 Dec 2025 11:45:39 +0800</pubDate>
-      <guid>https://lvzh2012.github.io/posts/swift-codable-macro/</guid>
-      <description>&lt;h1 id=&#34;codablemacro&#34;&gt;CodableMacro&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;CodableMacro&lt;/code&gt; 是一个轻量级的 Swift Macro 库，旨在简化 Swift 中 &lt;code&gt;Codable&lt;/code&gt; 协议的实现。通过使用宏，你可以极大地减少处理 JSON 解析时的样板代码，轻松处理自定义键名映射和默认值。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-特性-features&#34;&gt;✨ 特性 (Features)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;自动实现 Codable&lt;/strong&gt;: 使用 &lt;code&gt;@CodableModel&lt;/code&gt; 宏自动生成 &lt;code&gt;init(from: Decoder)&lt;/code&gt;、&lt;code&gt;encode(to: Encoder)&lt;/code&gt; 和 &lt;code&gt;CodingKeys&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;自定义键名&lt;/strong&gt;: 使用 &lt;code&gt;@CKey(&amp;quot;json_key&amp;quot;)&lt;/code&gt; 宏轻松映射 JSON 中的字段名。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;默认值支持&lt;/strong&gt;: 使用 &lt;code&gt;@Default(value)&lt;/code&gt; 宏为属性指定默认值，当 JSON 中缺少字段或解析失败时自动使用默认值。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;便捷解码&lt;/strong&gt;: 提供 &lt;code&gt;.rk&lt;/code&gt; 命名空间扩展，支持直接从 &lt;code&gt;Data&lt;/code&gt; 或 JSON &lt;code&gt;String&lt;/code&gt; 解码。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-安装-installation&#34;&gt;📦 安装 (Installation)&lt;/h2&gt;&#xA;&lt;h3 id=&#34;swift-package-manager&#34;&gt;Swift Package Manager&lt;/h3&gt;&#xA;&lt;p&gt;在你的 &lt;code&gt;Package.swift&lt;/code&gt; 文件中添加依赖：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>LLDB</title>
-      <link>https://lvzh2012.github.io/posts/lldb/</link>
-      <pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate>
-      <guid>https://lvzh2012.github.io/posts/lldb/</guid>
-      <description>&lt;h1 id=&#34;lldb-调试工具&#34;&gt;LLDB 调试工具&lt;/h1&gt;&#xA;&lt;p&gt;LLDB 是 LLVM 项目的一部分，是一个强大的调试器，用于调试 C、C++、Objective-C 和 Swift 程序。&lt;/p&gt;&#xA;&lt;h2 id=&#34;基本使用&#34;&gt;基本使用&lt;/h2&gt;&#xA;&lt;p&gt;LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复程序中的问题。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>关于我</title>
-      <link>https://lvzh2012.github.io/about/</link>
-      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://lvzh2012.github.io/about/</guid>
-      <description>&lt;h2 id=&#34;-个人简介&#34;&gt;👋 个人简介&lt;/h2&gt;&#xA;&lt;p&gt;欢迎来到我的博客！我是字·兮·书，一名热爱技术的开发者。&lt;/p&gt;&#xA;&lt;p&gt;奶奶个腿儿，炸了啊炸了啊啊啊啊啊啊啊啊啊啊啊！&lt;/p&gt;&#xA;&lt;h2 id=&#34;-技能专长&#34;&gt;🛠️ 技能专长&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;前端开发&lt;/strong&gt;: HTML, CSS, JavaScript, Vue.js&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;后端开发&lt;/strong&gt;: Node.js, Python, Go&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;博客框架&lt;/strong&gt;: Hugo, Hexo&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;工具技能&lt;/strong&gt;: Git, Docker, Linux&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-联系方式&#34;&gt;📫 联系方式&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;📧 邮箱：demiusking@outlook.com&lt;/li&gt;&#xA;&lt;li&gt;🐱 GitHub：&lt;a href=&#34;https://github.com/demius782&#34;&gt;demius782&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;🌐 博客：&lt;a href=&#34;https://blog.demius.tech/&#34;&gt;字·兮·书&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-当前专注&#34;&gt;🎯 当前专注&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hugo 主题开发与优化&lt;/li&gt;&#xA;&lt;li&gt;开源项目贡献&lt;/li&gt;&#xA;&lt;li&gt;技术博客写作与分享&lt;/li&gt;&#xA;&lt;li&gt;学习新的编程语言和框架&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Talk is cheap, Show me the code.</title><link>https://lvzh2012.github.io/</link><description>Recent content on Talk is cheap, Show me the code.</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 10 Dec 2025 11:45:39 +0800</lastBuildDate><atom:link href="https://lvzh2012.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Swift Codable Macro</title><link>https://lvzh2012.github.io/posts/swift-codable-macro/</link><pubDate>Wed, 10 Dec 2025 11:45:39 +0800</pubDate><guid>https://lvzh2012.github.io/posts/swift-codable-macro/</guid><description>&lt;h1 id="codablemacro">CodableMacro&lt;/h1>
+&lt;p>&lt;code>CodableMacro&lt;/code> 是一个轻量级的 Swift Macro 库，旨在简化 Swift 中 &lt;code>Codable&lt;/code> 协议的实现。通过使用宏，你可以极大地减少处理 JSON 解析时的样板代码，轻松处理自定义键名映射和默认值。&lt;/p>
+&lt;h2 id="-特性-features">✨ 特性 (Features)&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>自动实现 Codable&lt;/strong>: 使用 &lt;code>@CodableModel&lt;/code> 宏自动生成 &lt;code>init(from: Decoder)&lt;/code>、&lt;code>encode(to: Encoder)&lt;/code> 和 &lt;code>CodingKeys&lt;/code>。&lt;/li>
+&lt;li>&lt;strong>自定义键名&lt;/strong>: 使用 &lt;code>@CKey(&amp;quot;json_key&amp;quot;)&lt;/code> 宏轻松映射 JSON 中的字段名。&lt;/li>
+&lt;li>&lt;strong>默认值支持&lt;/strong>: 使用 &lt;code>@Default(value)&lt;/code> 宏为属性指定默认值，当 JSON 中缺少字段或解析失败时自动使用默认值。&lt;/li>
+&lt;li>&lt;strong>便捷解码&lt;/strong>: 提供 &lt;code>.rk&lt;/code> 命名空间扩展，支持直接从 &lt;code>Data&lt;/code> 或 JSON &lt;code>String&lt;/code> 解码。&lt;/li>
+&lt;/ul>
+&lt;h2 id="-安装-installation">📦 安装 (Installation)&lt;/h2>
+&lt;h3 id="swift-package-manager">Swift Package Manager&lt;/h3>
+&lt;p>在你的 &lt;code>Package.swift&lt;/code> 文件中添加依赖：&lt;/p></description></item><item><title>LLDB</title><link>https://lvzh2012.github.io/posts/lldb/</link><pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate><guid>https://lvzh2012.github.io/posts/lldb/</guid><description>&lt;h1 id="lldb-调试工具">LLDB 调试工具&lt;/h1>
+&lt;p>LLDB 是 LLVM 项目的一部分，是一个强大的调试器，用于调试 C、C++、Objective-C 和 Swift 程序。&lt;/p>
+&lt;h2 id="基本使用">基本使用&lt;/h2>
+&lt;p>LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复程序中的问题。&lt;/p></description></item></channel></rss>
