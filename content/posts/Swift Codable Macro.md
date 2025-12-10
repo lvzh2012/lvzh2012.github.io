@@ -6,6 +6,8 @@ tags = ['Swift']
 
 categories = ['Swift']
 
+cover = 'https://d-image.i4.cn/i4web/image//upload/20190227/1551233745646040866.jpg'
+
 +++
 
 # CodableMacro
