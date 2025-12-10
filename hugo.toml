@@ -1,12 +1,30 @@
 baseurl = "https://lvzh2012.github.io/"
-defaultContentLanguage = "en"
-languageCode = "en"
+defaultContentLanguage = "zh"
+languageCode = "zh-CN"
 title = "Talk is cheap, Show me the code."
-theme = "dream"
+theme = "demius"
+hasCJKLanguage = true
 
 # 确保文章可见性
 [build]
   writeStats = true
+
+# 允许在 markdown 中使用原始 HTML
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+    ordered = false
+
+# 输出格式
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# 启用 emoji 支持
+enableEmoji = true
 
 # [services]
 # [services.disqus]
@@ -15,21 +33,20 @@ theme = "dream"
 # ID = ""
 
 [params]
-zenMode = true
-
-lightTheme = "emerald"
-darkTheme = "forest"
-
-# backgroundImage = "img/global-background.jpg"
-# backgroundImageDark = ""
-
+# Demius 主题配置
 author = "梦想"
 description = "我的梦想概念"
-avatar = "img/avatar.jpg"
-headerTitle = "Hugo Theme Dream"
-motto = "motto"
 
-footerBottomText = "我是 foot 文本"
+# 布局显示配置
+homeColumns = 3                # 首页中间栏引擎：1=单列|2=双列|3=瀑布流
+mainSections = ["posts"]        # 首页主内容来源的 Section 列表
+summaryLength = 120            # 文章摘要截取长度(字符数)
+
+# 功能开关配置
+darkMode = true                # 默认启用暗色模式
+tocOpen = true                 # 文章目录默认展开
+pjax = true                    # 启用无刷新页面切换
+stickyHeader = true            # 页面下滑时导航栏固定在顶部
 
 # rss = true
 
