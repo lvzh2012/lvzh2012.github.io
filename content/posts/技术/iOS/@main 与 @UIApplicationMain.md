@@ -19,9 +19,6 @@ cover = "https://plus.unsplash.com/premium_photo-1673292293042-cafd9c8a3ab3?q=80
 
 ## 🎯 快速对比
 
-```python
-
-
 |         特性         |    @UIApplicationMain    |     @main      |
 | :------------------: | :----------------------: | :------------: |
 |     **引入版本**     |      Swift 早期版本      |   Swift 5.3+   |
@@ -31,9 +28,7 @@ cover = "https://plus.unsplash.com/premium_photo-1673292293042-cafd9c8a3ab3?q=80
 | **自定义 main 函数** |         ❌ 不支持         |     ✅ 支持     |
 |     **推荐使用**     |   ⚠️ 已弃用（推荐迁移）   |   ✅ **推荐**   |
 
-```
-
-核心区别**：`@UIApplicationMain` 是专门为 UIKit 应用程序设计的旧方式，而 `@main` 是 Swift 5.3+ 引入的通用入口点标记，功能更强大、适用范围更广。
+**核心区别**：`@UIApplicationMain` 是专门为 UIKit 应用程序设计的旧方式，而 `@main` 是 Swift 5.3+ 引入的通用入口点标记，功能更强大、适用范围更广。
 
 ---
 
