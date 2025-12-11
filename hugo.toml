@@ -399,7 +399,7 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
     # 各组件显示开关（默认true表示不配置时默认显示）
     showAuthor = true                      # 作者信息卡片
     showToc = true                         # 目录组件
-    showTags = false                        # 标签云
+    showTags = true                        # 标签云
     showRecent = false                      # 最新文章
     showCategories = false                  # 分类组件
     showArchive = false                     # 归档组件
@@ -648,8 +648,8 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
     # 标签组件配置
     [params.aside.tags]
       enableBackground = true             # 是否启用背景图片/颜色
-      backgroundImage = "/img/bj.jpg"                 # 背景图片URL（留空则不显示背景图）
-      backgroundColor = ""                 # 背景色（留空则不显示背景色，支持渐变，例如："linear-gradient(135deg, #667eea 0%, #764ba2 100%)"）
+      backgroundImage = ""   # /img/bj.jpg              # 背景图片URL（留空则不显示背景图）
+      backgroundColor = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"                 # 背景色（留空则不显示背景色，支持渐变，例如："linear-gradient(135deg, #667eea 0%, #764ba2 100%)"）
       backgroundSize = "cover"             # 背景图片尺寸：cover（覆盖）| contain（包含）| auto（自动）
       backgroundPosition = "center"        # 背景图片位置：center | top | bottom | left | right
       backgroundRepeat = "no-repeat"       # 背景图片重复：no-repeat | repeat | repeat-x | repeat-y
@@ -823,7 +823,7 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
   # ===== 背景图配置 =====
   [params.background]
     # 主题三栏布局背景图配置
-    effect_mode = "glass"            # 背景效果模式：transparent（透明）、glass（毛玻璃）、translucent（半透明）、solid（纯色，支持十六进制颜色值如#4fc3f7）
+    effect_mode = "transparent"            # 背景效果模式：transparent（透明）、glass（毛玻璃）、translucent（半透明）、solid（纯色，支持十六进制颜色值如#4fc3f7）
     
     # 整站背景图配置
     [params.background.site]
