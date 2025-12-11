@@ -250,11 +250,11 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
   
   # ===== 基础信息配置 =====
   author = "LvZhenHua"                      # 网站作者/所有者
-  description = "在0和1的世界里翱翔"  # 网站描述，用于SEO
+  description = "在0和1的世界里翱翔!"  # 网站描述，用于SEO
   
   # ===== 布局显示配置 =====
   homeColumns = 1             # 首页中间栏引擎：1=单列|2=双列|3=瀑布流
-  mainSections = ["posts"]                 # 首页主内容来源的 Section 列表（驱动卡片列表）
+  mainSections = ["posts", "iOS"]                 # 首页主内容来源的 Section 列表（驱动卡片列表）
   summaryLength = 84                      # 文章摘要截取长度(字符数)，用于列表摘要
   
   # ===== 文章卡片透明背景模式 =====

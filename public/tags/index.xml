@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
-    <lastBuildDate>Wed, 10 Dec 2025 11:45:39 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 11 Dec 2025 09:34:01 +0800</lastBuildDate>
     <atom:link href="https://lvzh2012.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IOS</title>
+      <link>https://lvzh2012.github.io/tags/ios/</link>
+      <pubDate>Thu, 11 Dec 2025 09:34:01 +0800</pubDate>
+      <guid>https://lvzh2012.github.io/tags/ios/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CocoaPods</title>
+      <link>https://lvzh2012.github.io/tags/cocoapods/</link>
+      <pubDate>Thu, 11 Dec 2025 00:58:55 +0800</pubDate>
+      <guid>https://lvzh2012.github.io/tags/cocoapods/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Swift</title>
       <link>https://lvzh2012.github.io/tags/swift/</link>
