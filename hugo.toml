@@ -882,7 +882,7 @@ hasCJKLanguage = true                      # 启用中日韩语言支持，优�
     avatar = "/img/avatar.jpg"             # 作者头像图片路径
     defaultCover = "/img/default-cover.webp"  # 文章默认封面图片路径
     fallbackImage = "/img/404.jpg"         # 图片加载失败时的备用图片
-    favicon = "/img/favicon.ico"           # 网站图标(favicon)
+    favicon = "/img/logo.png"           # 网站图标(favicon)
     logo = "/img/logo.png"                 # 网站LOGO图片(可选)
 
   # ===== 浮动按钮配置 =====
