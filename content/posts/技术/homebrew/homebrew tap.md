@@ -4,7 +4,7 @@ draft = false
 title = 'Homebrew Tap'
 tags = ["homebrew"]
 categories = ["homebrew"]
-cover = "https://images.unsplash.com/photo-1762887863007-26facb90ef24?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+cover = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSKzyhvjE3XNf6hiaiQ3KQYaIDDsX5lOOgWnGjt9usWPMLKeHKf"
 
 +++
 

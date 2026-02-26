@@ -7,7 +7,7 @@ tags = ['CocoaPods']
 
 categories = ['CocoaPods']
 
-cover = "https://images.unsplash.com/photo-1763972456511-fc3cf9bdca83?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+cover = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRL88NVt3zFyeHun2dVr6g6qkhk2LFB09cscfxBeQMZ1JzE5280"
 
 +++
 
