@@ -3,7 +3,7 @@
 # 请根据您的需求修改相应的配置项
 
 # ===== 站点基础配置 =====
-baseURL = 'https://lvzh2012.github.io/'          # 网站基础URL，生产环境需改为实际域名
+baseURL = 'https://xying.space/'                 # 自定义域名（GitHub Pages）
 languageCode = 'zh-CN'                     # 网站语言代码
 title = "LVZHENHUA'S BLOG"                   # 网站标题
 theme = 'demius'
