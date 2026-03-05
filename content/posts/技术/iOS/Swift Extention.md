@@ -3,8 +3,8 @@ date = '2026-03-03T17:03:15+08:00'
 draft = false
 title = 'Swift Extention'
 tags = ["Swift"]
-categories = [""]
-cover = "https://picsum.photos/seed/picsum/200/300"
+categories = ["Swift"]
+cover = "https://d-image.i4.cn/i4web/image//upload/20190227/1551233745646040866.jpg"
 
 +++
 

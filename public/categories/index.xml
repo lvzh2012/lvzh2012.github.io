@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
-    <lastBuildDate>Wed, 24 Dec 2025 16:23:06 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 03 Mar 2026 17:03:15 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Swift</title>
+      <link>http://localhost:1313/categories/swift/</link>
+      <pubDate>Tue, 03 Mar 2026 17:03:15 +0800</pubDate>
+      <guid>http://localhost:1313/categories/swift/</guid>
+      <description></description>
+    </item>
     <item>
       <title>IOS</title>
       <link>http://localhost:1313/categories/ios/</link>
@@ -35,13 +42,6 @@
       <link>http://localhost:1313/categories/cocoapods/</link>
       <pubDate>Thu, 11 Dec 2025 00:58:55 +0800</pubDate>
       <guid>http://localhost:1313/categories/cocoapods/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Swift</title>
-      <link>http://localhost:1313/categories/swift/</link>
-      <pubDate>Wed, 10 Dec 2025 11:45:39 +0800</pubDate>
-      <guid>http://localhost:1313/categories/swift/</guid>
       <description></description>
     </item>
     <item>
