@@ -30,7 +30,7 @@ LLDB 提供了丰富的调试功能，可以帮助开发者快速定位和修复
 
 - 在循环中如何使用
 
-  <img src="/images/lldb-breakpoint.png" alt="LLDB 断点配置" style="zoom:33%;" />
+  ![LLDB 断点配置](/images/lldb-breakpoint.png)
 
   > condition: 直接使用表达式 表达式连接用 与或非 && || !
   > ignore: 可以填写下忽略次数
