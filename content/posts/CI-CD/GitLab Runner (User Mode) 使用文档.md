@@ -2,7 +2,7 @@
 date = '2026-04-24T19:28:42+08:00'
 draft = false
 title = 'GitLab Runner (User Mode) 使用文档'
-tags = ["CI/CD"]
+tags = ["GitLab", "GitLab Runner", "macOS"]
 categories = ["CI/CD"]
 cover = "https://cdn.freebiesupply.com/logos/large/2x/gitlab-logo-png-transparent.png"
 

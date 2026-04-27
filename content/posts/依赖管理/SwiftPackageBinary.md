@@ -2,8 +2,8 @@
 date = '2026-03-12T11:19:27+08:00'
 draft = false
 title = 'Swift Package 源码与二进制分发指南'
-tags = ["iOS"]
-categories = ["Swift Package"]
+tags = ["Swift Package", "二进制分发", "XCFramework"]
+categories = ["依赖管理"]
 cover = "https://d-image.i4.cn/i4web/image//upload/20190227/1551233745646040866.jpg"
 
 +++

@@ -2,7 +2,7 @@
 date = '2026-04-26T16:22:32+08:00'
 draft = true
 title = 'Fastlane + GitLab CI/CD'
-tags = ["CI/CD"]
+tags = ["Fastlane", "GitLab", "CI/CD"]
 categories = ["CI/CD"]
 cover = "https://images.unsplash.com/photo-1776518411187-de29b9b1bcc1?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 

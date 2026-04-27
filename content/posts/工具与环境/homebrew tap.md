@@ -2,8 +2,8 @@
 date = '2025-12-15T14:22:28+08:00'
 draft = false
 title = 'Homebrew Tap'
-tags = ["homebrew"]
-categories = ["homebrew"]
+tags = ["Homebrew", "Tap"]
+categories = ["工具与环境"]
 cover = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSKzyhvjE3XNf6hiaiQ3KQYaIDDsX5lOOgWnGjt9usWPMLKeHKf"
 
 +++

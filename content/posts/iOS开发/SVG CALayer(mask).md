@@ -2,8 +2,8 @@
 date = '2025-12-23T16:44:11+08:00'
 draft = false
 title = 'SVG在iOS中的处理方式'
-tags = ["iOS", "SVG"]
-categories = ["iOS", "SVG"]
+tags = ["SVG", "Core Animation", "CALayer"]
+categories = ["iOS 开发"]
 cover = "https://plus.unsplash.com/premium_photo-1719943511528-7589c22de3ae?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 +++
 

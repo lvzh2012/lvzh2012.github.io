@@ -3,9 +3,9 @@ date = '2025-12-11T09:34:01+08:00'
 draft = false
 title = '全局pop返回手势'
 
-tags = ['iOS']
+tags = ['UIKit', 'UINavigationController', '手势']
 
-categories = ['iOS']
+categories = ['iOS 开发']
 
 cover = "https://images.unsplash.com/photo-1764877805075-c0cdcb2da65c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 

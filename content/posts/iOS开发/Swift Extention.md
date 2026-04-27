@@ -2,8 +2,8 @@
 date = '2026-03-03T17:03:15+08:00'
 draft = false
 title = 'Swift Extention'
-tags = ["Swift"]
-categories = ["Swift"]
+tags = ["Swift", "Extension"]
+categories = ["iOS 开发"]
 cover = "https://d-image.i4.cn/i4web/image//upload/20190227/1551233745646040866.jpg"
 
 +++

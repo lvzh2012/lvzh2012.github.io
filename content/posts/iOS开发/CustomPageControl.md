@@ -2,8 +2,8 @@
 date = '2026-04-27T22:13:06+08:00'
 draft = false
 title = 'CustomPageControl'
-tags = ["iOS"]
-categories = ["iOS"]
+tags = ["UIKit", "UIPageControl"]
+categories = ["iOS 开发"]
 
 # cover: https://picsum.photos/1920/1080 随机每次刷新页面都会更改
 cover = "https://picsum.photos/seed/2026-04-27T22:13:06+08:00/1920/1080"

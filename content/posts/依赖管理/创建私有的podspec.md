@@ -3,9 +3,9 @@
 date = '2025-12-11T00:58:55+08:00'
 draft = false
 title = 'CocoaPods'
-tags = ['CocoaPods']
+tags = ['CocoaPods', 'Podspec', '私有仓库']
 
-categories = ['CocoaPods']
+categories = ['依赖管理']
 
 cover = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRL88NVt3zFyeHun2dVr6g6qkhk2LFB09cscfxBeQMZ1JzE5280"
 

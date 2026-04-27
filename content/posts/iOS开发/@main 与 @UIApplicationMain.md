@@ -3,9 +3,9 @@ date = '2025-12-11T11:18:11+08:00'
 draft = false
 title = '@main与@UIApplicationMain'
 
-tags = ['iOS']
+tags = ['Swift', '应用入口']
 
-categories = ['iOS']
+categories = ['iOS 开发']
 
 cover = "https://plus.unsplash.com/premium_photo-1673292293042-cafd9c8a3ab3?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 

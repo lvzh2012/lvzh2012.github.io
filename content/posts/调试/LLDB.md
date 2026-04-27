@@ -2,9 +2,9 @@
 date = '2025-12-09T17:58:55+08:00'
 draft = false
 title = 'LLDB'
-tags = ['调试']
+tags = ['LLDB', 'Xcode', '断点']
 
-categories = ['XCode调试']
+categories = ['调试']
 
 cover = "https://b3953882.smushcdn.com/3953882/wp-content/uploads/2024/02/Group-601.png?lossy=1&strip=1&avif=1"
 
