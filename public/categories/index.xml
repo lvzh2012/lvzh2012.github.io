@@ -2,46 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on LVZHENHUA&#39;S BLOG</title>
-    <link>http://localhost:56388/categories/</link>
+    <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on LVZHENHUA&#39;S BLOG</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
     <lastBuildDate>Mon, 27 Apr 2026 22:13:06 +0800</lastBuildDate>
-    <atom:link href="http://localhost:56388/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IOS 开发</title>
-      <link>http://localhost:56388/categories/ios-%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</link>
       <pubDate>Mon, 27 Apr 2026 22:13:06 +0800</pubDate>
-      <guid>http://localhost:56388/categories/ios-%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
     <item>
       <title>CI/CD</title>
-      <link>http://localhost:56388/categories/ci/cd/</link>
+      <link>http://localhost:1313/categories/ci/cd/</link>
       <pubDate>Sun, 26 Apr 2026 16:22:32 +0800</pubDate>
-      <guid>http://localhost:56388/categories/ci/cd/</guid>
+      <guid>http://localhost:1313/categories/ci/cd/</guid>
       <description></description>
     </item>
     <item>
       <title>工具与环境</title>
-      <link>http://localhost:56388/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</link>
+      <link>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Thu, 12 Mar 2026 11:28:52 +0800</pubDate>
-      <guid>http://localhost:56388/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</guid>
+      <guid>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</guid>
       <description></description>
     </item>
     <item>
       <title>依赖管理</title>
-      <link>http://localhost:56388/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link>
+      <link>http://localhost:1313/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link>
       <pubDate>Thu, 12 Mar 2026 11:19:27 +0800</pubDate>
-      <guid>http://localhost:56388/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid>
+      <guid>http://localhost:1313/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid>
       <description></description>
     </item>
     <item>
       <title>调试</title>
-      <link>http://localhost:56388/categories/%E8%B0%83%E8%AF%95/</link>
+      <link>http://localhost:1313/categories/%E8%B0%83%E8%AF%95/</link>
       <pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate>
-      <guid>http://localhost:56388/categories/%E8%B0%83%E8%AF%95/</guid>
+      <guid>http://localhost:1313/categories/%E8%B0%83%E8%AF%95/</guid>
       <description></description>
     </item>
   </channel>

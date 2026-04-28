@@ -4,7 +4,7 @@ draft = true
 title = 'Env'
 tags = ["字体", "开发环境"]
 categories = ["工具与环境"]
-cover = "https://picsum.photos/seed/picsum/200/300"
+cover = "https://picsum.photos/seed/{{ .Date }}/1920/1080"
 
 +++
 
@@ -17,3 +17,7 @@ DM
 Consolas
 
 Ubuntu
+
+## Hugo Theme
+
+demius
