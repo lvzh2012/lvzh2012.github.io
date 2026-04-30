@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
-    <lastBuildDate>Mon, 27 Apr 2026 22:13:06 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2026 18:13:25 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/tags/git/</link>
+      <pubDate>Thu, 30 Apr 2026 18:13:25 +0800</pubDate>
+      <guid>http://localhost:1313/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Swift</title>
+      <link>http://localhost:1313/tags/swift/</link>
+      <pubDate>Tue, 28 Apr 2026 11:54:08 +0800</pubDate>
+      <guid>http://localhost:1313/tags/swift/</guid>
+      <description></description>
+    </item>
     <item>
       <title>UIKit</title>
       <link>http://localhost:1313/tags/uikit/</link>
@@ -101,13 +115,6 @@
       <description></description>
     </item>
     <item>
-      <title>Swift</title>
-      <link>http://localhost:1313/tags/swift/</link>
-      <pubDate>Tue, 03 Mar 2026 17:03:15 +0800</pubDate>
-      <guid>http://localhost:1313/tags/swift/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>UIViewPropertyAnimator</title>
       <link>http://localhost:1313/tags/uiviewpropertyanimator/</link>
       <pubDate>Wed, 24 Dec 2025 16:23:06 +0800</pubDate>
@@ -140,13 +147,6 @@
       <link>http://localhost:1313/tags/svg/</link>
       <pubDate>Tue, 23 Dec 2025 16:44:11 +0800</pubDate>
       <guid>http://localhost:1313/tags/svg/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Homebrew</title>
-      <link>http://localhost:1313/tags/homebrew/</link>
-      <pubDate>Mon, 15 Dec 2025 14:22:28 +0800</pubDate>
-      <guid>http://localhost:1313/tags/homebrew/</guid>
       <description></description>
     </item>
   </channel>

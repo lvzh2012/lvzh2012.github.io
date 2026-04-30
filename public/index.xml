@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
-    <lastBuildDate>Mon, 27 Apr 2026 22:13:06 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2026 18:13:25 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/posts/git.html/</link>
+      <pubDate>Thu, 30 Apr 2026 18:13:25 +0800</pubDate>
+      <guid>http://localhost:1313/posts/git.html/</guid>
+      <description>&lt;h1 id=&#34;git&#34;&gt;Git&lt;/h1&gt;&#xA;&lt;h3 id=&#34;rebase&#34;&gt;Rebase&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在 &lt;code&gt;1.0.0&lt;/code&gt; 上执行 &lt;code&gt;rebase main&lt;/code&gt; —— 把 &lt;code&gt;1.0.0&lt;/code&gt; 的提交重放到 &lt;code&gt;main&lt;/code&gt; 顶端&lt;/li&gt;&#xA;&lt;li&gt;把 &lt;code&gt;main&lt;/code&gt; 指针快进到 &lt;code&gt;1.0.0&lt;/code&gt; 的位置(fast-forward,不会产生 merge commit)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-git&#34; data-lang=&#34;git&#34;&gt;git checkout main&#xA;git pull origin main&#xA;git checkout 1.0.0&#xA;git rebase main&#xA;git checkout main&#xA;git merge --ff-only 1.0.0&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>Android01</title>
+      <link>http://localhost:1313/posts/android01.html/</link>
+      <pubDate>Tue, 28 Apr 2026 11:54:08 +0800</pubDate>
+      <guid>http://localhost:1313/posts/android01.html/</guid>
+      <description></description>
+    </item>
     <item>
       <title>CustomPageControl</title>
       <link>http://localhost:1313/posts/custompagecontrol.html/</link>
@@ -35,7 +49,7 @@
       <link>http://localhost:1313/posts/env.html/</link>
       <pubDate>Thu, 12 Mar 2026 11:28:52 +0800</pubDate>
       <guid>http://localhost:1313/posts/env.html/</guid>
-      <description>&lt;h2 id=&#34;fonts&#34;&gt;Fonts&lt;/h2&gt;&#xA;&lt;p&gt;DM&lt;/p&gt;&#xA;&lt;p&gt;Consolas&lt;/p&gt;&#xA;&lt;p&gt;Ubuntu&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;fonts&#34;&gt;Fonts&lt;/h2&gt;&#xA;&lt;p&gt;DM&lt;/p&gt;&#xA;&lt;p&gt;Consolas&lt;/p&gt;&#xA;&lt;p&gt;Ubuntu&lt;/p&gt;&#xA;&lt;h2 id=&#34;hugo-theme&#34;&gt;Hugo Theme&lt;/h2&gt;&#xA;&lt;p&gt;demius&lt;/p&gt;</description>
     </item>
     <item>
       <title>Swift Package 源码与二进制分发指南</title>

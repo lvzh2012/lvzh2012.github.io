@@ -7,12 +7,19 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
-    <lastBuildDate>Mon, 27 Apr 2026 22:13:06 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2026 18:13:25 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/categories/git/</link>
+      <pubDate>Thu, 30 Apr 2026 18:13:25 +0800</pubDate>
+      <guid>http://localhost:1313/categories/git/</guid>
+      <description></description>
+    </item>
     <item>
       <title>IOS 开发</title>
       <link>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Mon, 27 Apr 2026 22:13:06 +0800</pubDate>
+      <pubDate>Tue, 28 Apr 2026 11:54:08 +0800</pubDate>
       <guid>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
