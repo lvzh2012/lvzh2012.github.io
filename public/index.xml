@@ -7,21 +7,28 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2025 Lv·Z·H</copyright>
-    <lastBuildDate>Thu, 30 Apr 2026 18:13:25 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 16:18:51 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create AAR Package</title>
+      <link>http://localhost:1313/posts/create-aar-package.html/</link>
+      <pubDate>Sat, 09 May 2026 16:18:51 +0800</pubDate>
+      <guid>http://localhost:1313/posts/create-aar-package.html/</guid>
+      <description>&lt;h1 id=&#34;android-aar-包创建与发布完整指南&#34;&gt;Android AAR 包创建与发布完整指南&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本指南基于 &lt;strong&gt;AGP 8.x / 9.x + Gradle 8.x / 9.x&lt;/strong&gt; 编写，涵盖了从传统 Kotlin 插件到 AGP 9.0+ 内置 Kotlin 的演进。&#xA;适用于任何标准的 Android Library 开发与发布流程。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;[TOC]&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一aar-vs-apk核心区别&#34;&gt;一、AAR vs APK：核心区别&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;维度&lt;/th&gt;&#xA;          &lt;th&gt;APK（Application）&lt;/th&gt;&#xA;          &lt;th&gt;AAR（Library）&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Gradle 插件&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;com.android.application&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;com.android.library&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;输出产物&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;app-release.apk&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;app-release.aar&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;applicationId&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;✅ 必须&lt;/td&gt;&#xA;          &lt;td&gt;❌ 不支持&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;versionCode&lt;/code&gt; / &lt;code&gt;versionName&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;✅ 必须&lt;/td&gt;&#xA;          &lt;td&gt;❌ 不支持&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;targetSdk&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;✅ 影响 Play 行为&lt;/td&gt;&#xA;          &lt;td&gt;❌ 不消费&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;版本号控制方式&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;versionName = &amp;quot;1.0&amp;quot;&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;version = &amp;quot;1.0.0&amp;quot;&lt;/code&gt;（Gradle 项目属性）&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;混淆规则&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;proguardFiles&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;strong&gt;&lt;code&gt;consumerProguardFiles&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;ProGuard 时机&lt;/td&gt;&#xA;          &lt;td&gt;自己被混淆&lt;/td&gt;&#xA;          &lt;td&gt;规则交给消费方使用&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;一句话：&lt;strong&gt;AAR 是给别人用的代码库，没有&amp;quot;应用入口&amp;quot;概念&lt;/strong&gt;。所有应用专属字段（图标、主题、applicationId、版本号）都不属于 AAR。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Android_01</title>
+      <link>http://localhost:1313/posts/android_01.html/</link>
+      <pubDate>Wed, 06 May 2026 15:44:20 +0800</pubDate>
+      <guid>http://localhost:1313/posts/android_01.html/</guid>
+      <description>&lt;h1 id=&#34;android开发&#34;&gt;Android开发&lt;/h1&gt;&#xA;&lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;./&lt;/span&gt;gradlew assembleDebug&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     <item>
       <title>Git</title>
       <link>http://localhost:1313/posts/git.html/</link>
       <pubDate>Thu, 30 Apr 2026 18:13:25 +0800</pubDate>
       <guid>http://localhost:1313/posts/git.html/</guid>
       <description>&lt;h1 id=&#34;git&#34;&gt;Git&lt;/h1&gt;&#xA;&lt;h3 id=&#34;rebase&#34;&gt;Rebase&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在 &lt;code&gt;1.0.0&lt;/code&gt; 上执行 &lt;code&gt;rebase main&lt;/code&gt; —— 把 &lt;code&gt;1.0.0&lt;/code&gt; 的提交重放到 &lt;code&gt;main&lt;/code&gt; 顶端&lt;/li&gt;&#xA;&lt;li&gt;把 &lt;code&gt;main&lt;/code&gt; 指针快进到 &lt;code&gt;1.0.0&lt;/code&gt; 的位置(fast-forward,不会产生 merge commit)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-git&#34; data-lang=&#34;git&#34;&gt;git checkout main&#xA;git pull origin main&#xA;git checkout 1.0.0&#xA;git rebase main&#xA;git checkout main&#xA;git merge --ff-only 1.0.0&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
-    </item>
-    <item>
-      <title>Android01</title>
-      <link>http://localhost:1313/posts/android01.html/</link>
-      <pubDate>Tue, 28 Apr 2026 11:54:08 +0800</pubDate>
-      <guid>http://localhost:1313/posts/android01.html/</guid>
-      <description></description>
     </item>
     <item>
       <title>CustomPageControl</title>
