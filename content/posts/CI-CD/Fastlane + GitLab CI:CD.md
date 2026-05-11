@@ -11,7 +11,7 @@ cover = "https://images.unsplash.com/photo-1776518411187-de29b9b1bcc1?q=80&w=174
 # iOS 项目 Fastlane + GitLab CI/CD 完整配置指南
 
 **面向小白用户的详细教程**  
-**项目**：snap2chat  
+**项目**：project  
 **最后更新**：2026-04-26
 
 ---
@@ -49,14 +49,14 @@ brew info ruby
 ### 2.2 项目文件结构（当前已有）
 
 ```
-snap2chat/
+project/
 ├── fastlane/
 │   ├── Fastfile          # 核心配置文件（所有 lane）
 │   ├── Appfile           # 项目基本信息
 │   └── README.md
 ├── .gitlab-ci.yml        # GitLab 流水线配置
 ├── Podfile
-├── snap2chat.xcodeproj/
+├── project.xcodeproj/
 └── docs/
     └── IOS_CICD_FASTLANE_GITLAB_GUIDE.md   # 本文档
 ```
@@ -118,8 +118,8 @@ lane :test_compile do
   UI.header("🔨 Starting test compilation (Debug mode)")
 
   gym(
-    scheme: "snap2chat",
-    workspace: "snap2chat.xcworkspace",
+    scheme: "project",
+    workspace: "project.xcworkspace",
     configuration: "Debug",           # 使用 Debug 更快
     export_method: "development",
     output_directory: "builds/test",
@@ -177,7 +177,7 @@ variables:
     - macos
     - shell
   before_script:
-    - echo "🚀 Starting iOS CI/CD for snap2chat (Homebrew mode)"
+    - echo "🚀 Starting iOS CI/CD for project (Homebrew mode)"
     - ruby --version
     - 'which fastlane && echo "✅ fastlane: $(which fastlane)" || (echo "❌ fastlane not found"; exit 1)'
     - 'which pod && echo "✅ pod: $(which pod)" || (echo "❌ pod not found"; exit 1)'
@@ -273,7 +273,7 @@ flowchart TD
 
 ```bash
 # 1. 进入项目目录
-cd ~/Desktop/AI/snap2chat
+cd ~/Desktop/AI/project
 
 # 2. 测试编译（最重要）
 fastlane test_compile
@@ -313,7 +313,7 @@ fastlane build_ipa
 - 命令：
 
   ```bash
-  git remote set-url origin https://oauth2:YOUR_TOKEN@git.costnovel.com/cashbox-ai/snap2chat.git
+  git remote set-url origin https://oauth2:YOUR_TOKEN@git.xxx.com/xxx/project.git
   ```
 
 ### 7.3 编译失败（gym error）
