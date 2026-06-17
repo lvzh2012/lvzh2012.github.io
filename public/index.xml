@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>Copyright © 2024-2026 Lv·Z·H</copyright>
-    <lastBuildDate>Sat, 09 May 2026 16:18:51 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jun 2026 15:44:20 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>测试页面</title>
+      <link>http://localhost:1313/posts/%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2.html/</link>
+      <pubDate>Fri, 05 Jun 2026 15:44:20 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2.html/</guid>
+      <description>&lt;style&gt;&#xA;  .test-container {&#xA;    max-width: 720px;&#xA;    margin: 0 auto;&#xA;    padding: 1rem 0;&#xA;    line-height: 1.6;&#xA;  }&#xA;  .test-container h1 { color: #2563eb; }&#xA;  .test-card {&#xA;    border: 1px solid #e5e7eb;&#xA;    border-radius: 8px;&#xA;    padding: 1.5rem;&#xA;    margin: 1rem 0;&#xA;    background: #f9fafb;&#xA;  }&#xA;  .test-tag {&#xA;    display: inline-block;&#xA;    background: #dbeafe;&#xA;    color: #1e40af;&#xA;    padding: 2px 10px;&#xA;    border-radius: 12px;&#xA;    font-size: 0.875rem;&#xA;    margin-right: 4px;&#xA;  }&#xA;&lt;/style&gt;&#xA;&lt;div class=&#34;test-container&#34;&gt;&#xA;  &lt;h1&gt;Hello, World!&lt;/h1&gt;&#xA;  &lt;p&gt;这是一个由 Hugo 渲染的静态 HTML 测试页面。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Create AAR Package</title>
       <link>http://localhost:1313/posts/create-aar-package.html/</link>
