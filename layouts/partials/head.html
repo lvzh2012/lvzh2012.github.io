@@ -1,0 +1,22 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="author" content="{{ .Site.Params.author }}">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+{{ $cssFiles := slice
+  (resources.Get "css/_variables.css")
+  (resources.Get "css/_base.css")
+  (resources.Get "css/_header.css")
+  (resources.Get "css/_footer.css")
+  (resources.Get "css/_hero.css")
+  (resources.Get "css/_home-sidebar.css")
+  (resources.Get "css/_post-card.css")
+  (resources.Get "css/_post-page.css")
+  (resources.Get "css/_post-enhancements.css")
+  (resources.Get "css/_list.css")
+  (resources.Get "css/_responsive.css")
+}}
+{{ with resources.Concat "css/main.css" $cssFiles | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}

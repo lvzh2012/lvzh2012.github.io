@@ -1,76 +1,89 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on LVZHENHUA&#39;S BLOG</title>
-    <link>http://localhost:1313/categories/</link>
-    <description>Recent content in Categories on LVZHENHUA&#39;S BLOG</description>
-    <generator>Hugo</generator>
-    <language>zh-CN</language>
-    <copyright>Copyright © 2024-2026 Lv·Z·H</copyright>
-    <lastBuildDate>Fri, 05 Jun 2026 15:44:20 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>测试</title>
-      <link>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</link>
-      <pubDate>Fri, 05 Jun 2026 15:44:20 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Android 开发</title>
-      <link>http://localhost:1313/categories/android-%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Sat, 09 May 2026 16:18:51 +0800</pubDate>
-      <guid>http://localhost:1313/categories/android-%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Andorid 开发</title>
-      <link>http://localhost:1313/categories/andorid-%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Wed, 06 May 2026 15:44:20 +0800</pubDate>
-      <guid>http://localhost:1313/categories/andorid-%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Git</title>
-      <link>http://localhost:1313/categories/git/</link>
-      <pubDate>Thu, 30 Apr 2026 18:13:25 +0800</pubDate>
-      <guid>http://localhost:1313/categories/git/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>IOS 开发</title>
-      <link>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Mon, 27 Apr 2026 22:13:06 +0800</pubDate>
-      <guid>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CI/CD</title>
-      <link>http://localhost:1313/categories/ci/cd/</link>
-      <pubDate>Sun, 26 Apr 2026 16:22:32 +0800</pubDate>
-      <guid>http://localhost:1313/categories/ci/cd/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>工具与环境</title>
-      <link>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Thu, 12 Mar 2026 11:28:52 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>依赖管理</title>
-      <link>http://localhost:1313/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link>
-      <pubDate>Thu, 12 Mar 2026 11:19:27 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>调试</title>
-      <link>http://localhost:1313/categories/%E8%B0%83%E8%AF%95/</link>
-      <pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E8%B0%83%E8%AF%95/</guid>
-      <description></description>
-    </item>
-  </channel>
+	<channel>
+		<title>Categories on LVZHENHUA&#39;S BLOG</title>
+		<link>http://localhost:1313/categories/</link>
+		<description>Recent content in Categories on LVZHENHUA&#39;S BLOG</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+			<copyright>Copyright © 2024-2026 Lv·Z·H</copyright>
+		
+		
+			<lastBuildDate>Sun, 28 Jun 2026 19:13:28 +0800</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>IOS 面试</title>
+				<link>http://localhost:1313/categories/ios-%E9%9D%A2%E8%AF%95/</link>
+				<pubDate>Sun, 28 Jun 2026 19:13:28 +0800</pubDate>
+				<guid>http://localhost:1313/categories/ios-%E9%9D%A2%E8%AF%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>测试</title>
+				<link>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</link>
+				<pubDate>Fri, 05 Jun 2026 15:44:20 +0800</pubDate>
+				<guid>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Android 开发</title>
+				<link>http://localhost:1313/categories/android-%E5%BC%80%E5%8F%91/</link>
+				<pubDate>Sat, 09 May 2026 16:18:51 +0800</pubDate>
+				<guid>http://localhost:1313/categories/android-%E5%BC%80%E5%8F%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Andorid 开发</title>
+				<link>http://localhost:1313/categories/andorid-%E5%BC%80%E5%8F%91/</link>
+				<pubDate>Wed, 06 May 2026 15:44:20 +0800</pubDate>
+				<guid>http://localhost:1313/categories/andorid-%E5%BC%80%E5%8F%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Git</title>
+				<link>http://localhost:1313/categories/git/</link>
+				<pubDate>Thu, 30 Apr 2026 18:13:25 +0800</pubDate>
+				<guid>http://localhost:1313/categories/git/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>IOS 开发</title>
+				<link>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</link>
+				<pubDate>Mon, 27 Apr 2026 22:13:06 +0800</pubDate>
+				<guid>http://localhost:1313/categories/ios-%E5%BC%80%E5%8F%91/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CI/CD</title>
+				<link>http://localhost:1313/categories/ci/cd/</link>
+				<pubDate>Sun, 26 Apr 2026 16:22:32 +0800</pubDate>
+				<guid>http://localhost:1313/categories/ci/cd/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>工具与环境</title>
+				<link>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</link>
+				<pubDate>Thu, 12 Mar 2026 11:28:52 +0800</pubDate>
+				<guid>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>依赖管理</title>
+				<link>http://localhost:1313/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link>
+				<pubDate>Thu, 12 Mar 2026 11:19:27 +0800</pubDate>
+				<guid>http://localhost:1313/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>调试</title>
+				<link>http://localhost:1313/categories/%E8%B0%83%E8%AF%95/</link>
+				<pubDate>Tue, 09 Dec 2025 17:58:55 +0800</pubDate>
+				<guid>http://localhost:1313/categories/%E8%B0%83%E8%AF%95/</guid>
+				<description></description>
+			</item>
+	</channel>
 </rss>
