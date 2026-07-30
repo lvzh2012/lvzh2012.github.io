@@ -26,6 +26,8 @@ block();
 
 **本质**：Block 是指向 **结构体** 的指针，结构体里包含 **isa、flags、invoke 函数指针、descriptor、捕获变量** 等。
 
+> 栈 / 堆 / 全局区 / 常量区总览见 [第一章 §1.0 进程内存布局](/posts/%E7%AC%AC%E4%B8%80%E7%AB%A0isa-%E4%B8%8E-superclass.html#10-进程内存布局栈--堆--代码区--常量区基础)。
+
 ---
 
 ## 3.2 Block 的三种类型（必背）
@@ -57,7 +59,38 @@ void (^autoCopyBlock)(void) = ^{
 
 > 不捕获 auto → Global；捕获 auto → 先在栈；copy / 赋值 strong → 到堆。
 
----
+### ARC 下栈 Block 少见吗？
+
+**对，业务代码里「长期停留在栈上的 Block」很少见**，但 **底层仍会先产生栈 Block**，多数场景编译器会 **立刻 copy 到堆**。
+
+| 场景 | ARC 行为 |
+|------|----------|
+| 赋给 `__strong` 变量 | **自动 copy** → 堆 Block |
+| 作为参数传给方法 | 通常 **自动 copy**（防逃逸后栈失效） |
+| 从方法 **return** block | **自动 copy** 到堆 |
+| 放进 `NSArray` 等 | **自动 copy** |
+| `@property (copy)` | setter 里 copy（语义 + 兼容栈 Block） |
+| **同一作用域内立刻调用、不逃逸** | 可能 **短暂** 是栈 Block，调完即失效 |
+
+```objc
+- (void)demo {
+    int a = 10;
+    // ① 创建时：__NSStackBlock__（捕获 auto）
+    // ② 赋给 strong 变量：编译器插入 copy → __NSMallocBlock__
+    void (^b)(void) = ^{
+        NSLog(@"%d", a);
+    };
+
+    // ③ 若完全不赋值、不传递，仅同步调用：
+    ^(void){ NSLog(@"%d", a); }();  // 可能全程栈上，函数返回前执行完 → 仍安全
+}
+```
+
+**面试怎么答**：
+
+> ARC 下 **很少手动 `[block copy]`**，也 **很少在调试里长期看到 Stack Block**，因为编译器自动 copy。但 **三种类型原理没变**：捕获 auto 的 Block **创建在栈**，逃逸时 **必须到堆**；MRC 需手写 copy，ARC 由编译器代劳。Global Block（不捕获 auto）依然 **不在堆**。
+
+**`@property copy` 在 ARC 下还要吗？** 要——语义是「我要独立副本」；Block 仍可能从外部传入；且 copy 对 Global Block 是 no-op，对堆 Block 可能 retain，**无害且正确**。
 
 ## 3.3 Block 内存布局（简化）
 
@@ -172,7 +205,7 @@ self ──strong──► block（堆）
 
 ## 3.7 Block 与 GCD / 多线程
 
-> GCD 细节见 [第四章 多线程面试八股](./04-多线程面试八股.md)。
+> GCD 细节见 [第四章 多线程面试八股](/posts/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)。
 
 ```objc
 // Block 是 GCD 的任务载体

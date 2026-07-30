@@ -8,7 +8,7 @@ categories = ['iOS 面试']
 
 # 第七章：事件响应链（Responder Chain）
 
-> **学习位置**：紧接 [第六章 Hit-Testing](./06-事件传递链HitTesting.md)。  
+> **学习位置**：紧接 [第六章 Hit-Testing](/posts/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E9%93%BEhit-testing.html)。  
 > **语言无关**：UIKit 机制，OC 与 Swift **原理完全相同**。
 
 **响应链解决的是：谁来处理这个事件？处理不了交给谁？**
@@ -31,27 +31,39 @@ hitTest 命中的 View（touch 首先发到这里）
 
 ---
 
+
+
 ## 7.1 响应者对象（UIResponder）
 
 能处理事件的对象都继承 `UIResponder`：`UIView`、`UIViewController`、`UIWindow`、`UIApplication` 等。
 
-每个对象有一个 **`nextResponder`** 属性（Swift 中为 `next`），表示 **响应链上的下一个对象**。
+每个对象有一个 `nextResponder` 属性（Swift 中为 `next`），表示 **响应链上的下一个对象**。
 
 ---
 
+
+
 ## 7.2 nextResponder 是什么？（高频）
+
+
 
 ### 一句话
 
-> **`nextResponder` = 响应链上的「上一级负责人」**，只读属性，由系统按对象类型 **自动维护**（一般不要手动改）。
+> `nextResponder` **= 响应链上的「上一级负责人」**，只读属性，由系统按对象类型 **自动维护**（一般不要手动改）。
+
+
 
 ### 和 superview 的区别
 
-| | `superview` | `nextResponder` |
-|--|-------------|-----------------|
-| 所属 | View **层级**关系 | **事件响应**关系 |
-| 方向 | 父 View | 链上的下一个响应者 |
+
+|      | `superview`                         | `nextResponder`            |
+| ---- | ----------------------------------- | -------------------------- |
+| 所属   | View **层级**关系                       | **事件响应**关系                 |
+| 方向   | 父 View                              | 链上的下一个响应者                  |
 | 是否相同 | 多数子 View 中 **相同**（next = superview） | 根 View、VC、Window 等处 **不同** |
+
+
+
 
 ### 默认指向规则（背这条链）
 
@@ -77,23 +89,29 @@ UIApplication
 AppDelegate / nil
 ```
 
-| 对象 | `nextResponder` 通常指向 |
-|------|--------------------------|
-| **普通 UIView** | `superview` |
-| **VC 的根 View** | 所属的 **`UIViewController`**（特例） |
-| **UIViewController** | `view.window` 或容器相关上级 |
-| **UIWindow** | **`UIApplication`** |
-| **UIApplication** | **AppDelegate**（或 nil） |
+
+| 对象                   | `nextResponder` 通常指向       |
+| -------------------- | -------------------------- |
+| **普通 UIView**        | `superview`                |
+| **VC 的根 View**       | 所属的 `UIViewController`（特例） |
+| **UIViewController** | `view.window` 或容器相关上级      |
+| **UIWindow**         | `UIApplication`            |
+| **UIApplication**    | **AppDelegate**（或 nil）     |
+
+
+
 
 ### 什么时候会用到 nextResponder？
 
-| 场景 | 是否自动沿链向上 |
-|------|------------------|
-| **Touch 事件**（`touchesBegan` 等） | ⚠️ **默认不自动向上传**——只发给 hitTest 命中的 View |
-| **`sendAction:to:from:` 且 target 为 nil** | ✅ 系统沿响应链 **查找** 能响应 selector 的对象 |
-| **摇一摇等 Motion 事件** | ✅ 会沿响应链向上传递 |
-| **键盘 / 输入**（First Responder） | ✅ 与 `becomeFirstResponder` / `resign` 相关 |
-| **UIControl 事件** | 走 target-action / `UIAction`，不依赖你重写 touchesBegan |
+
+| 场景                                       | 是否自动沿链向上                                         |
+| ---------------------------------------- | ------------------------------------------------ |
+| **Touch 事件**（`touchesBegan` 等）           | ⚠️ **默认不自动向上传**——只发给 hitTest 命中的 View            |
+| `sendAction:to:from:` **且 target 为 nil** | ✅ 系统沿响应链 **查找** 能响应 selector 的对象                 |
+| **摇一摇等 Motion 事件**                       | ✅ 会沿响应链向上传递                                      |
+| **键盘 / 输入**（First Responder）             | ✅ 与 `becomeFirstResponder` / `resign` 相关         |
+| **UIControl 事件**                         | 走 target-action / `UIAction`，不依赖你重写 touchesBegan |
+
 
 **易错纠正**：
 
@@ -105,6 +123,8 @@ touchesBegan 无业务逻辑
     ↓
 用户：点了没反应
 ```
+
+
 
 ### 语法对照：遍历响应链 / 手动转发
 
@@ -156,16 +176,22 @@ Motion / target=nil 的 action 等：系统沿链向上查找
 
 ---
 
+
+
 ## 7.4 传递链 vs 响应链（对比表）
 
-| | **传递链 Hit-Testing** | **响应链 Responder Chain** |
-|--|------------------------|---------------------------|
-| **方向** | 自上而下（Window → 子 View） | 自下而上（first responder → next） |
-| **目的** | 找到**谁接收**触摸 | 找到**谁处理**触摸 |
+
+|          | **传递链 Hit-Testing**         | **响应链 Responder Chain**             |
+| -------- | --------------------------- | ----------------------------------- |
+| **方向**   | 自上而下（Window → 子 View）       | 自下而上（first responder → next）        |
+| **目的**   | 找到**谁接收**触摸                 | 找到**谁处理**触摸                         |
 | **核心方法** | `hitTest:` / `pointInside:` | `touchesBegan:` 等 + `nextResponder` |
-| **时机** | 触摸开始瞬间 | 整个触摸生命周期 |
+| **时机**   | 触摸开始瞬间                      | 整个触摸生命周期                            |
+
 
 ---
+
+
 
 ## 7.5 手势识别器（关联）
 
@@ -187,7 +213,11 @@ extension MyViewController: UIGestureRecognizerDelegate {
 
 ---
 
+
+
 ## 7.6 语法对照：常见业务写法
+
+
 
 ### 点击空白收键盘
 
@@ -208,6 +238,8 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
 }
 ```
+
+
 
 ### UIButton / UIControl 事件
 
@@ -235,7 +267,11 @@ SwiftUI View 是 struct，不直接参与响应链；底层 **Hosting UIView** �
 
 ---
 
+
+
 ## 7.7 高频面试 Q&A
+
+
 
 ### Q1：点击按钮完整链路？
 
@@ -243,6 +279,8 @@ SwiftUI View 是 struct，不直接参与响应链；底层 **Hosting UIView** �
 2. **Touch 阶段**：Button 内部 touch 处理 + 手势识别
 3. **Action 阶段**：`sendAction:to:forEvent:` → selector / `UIAction`
 4. 若 Button 不响应：事件 **不会自动** 沿链向上（touch 默认不冒泡）
+
+
 
 ### Q2：ViewController 为什么能收到事件？
 

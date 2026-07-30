@@ -8,6 +8,108 @@ categories = ['iOS 面试']
 
 # 第一章：isa 与 superclass
 
+## 1.0 进程内存布局：栈 / 堆 / 代码区 / 常量区（基础）
+
+> Block、对象、局部变量面试都会用到。先建立 **「谁在哪、谁管生命周期」** 的地图。
+
+### 典型分区（逻辑视图）
+
+```
+高地址
+┌─────────────────────────────────┐
+│  栈 Stack                        │  局部变量、函数调用帧、参数
+│  ↓ 向下增长                       │  自动分配/释放，线程私有
+├─────────────────────────────────┤
+│         （空闲 / 映射区）          │
+├─────────────────────────────────┤
+│  堆 Heap                         │  malloc / new / OC 对象 / Block(堆)
+│  ↑ 向上增长                       │  手动或 ARC 管理，多线程共享
+├─────────────────────────────────┤
+│  BSS 段                          │  未初始化的全局/静态变量（启动时清零）
+├─────────────────────────────────┤
+│  已初始化数据段 .data             │  有初始值的全局/静态变量
+├─────────────────────────────────┤
+│  常量区 / 只读数据段 .rodata       │  字符串字面量、const 常量
+├─────────────────────────────────┤
+│  代码区 / 文本段 .text             │  编译后的机器指令，只读可执行
+低地址
+```
+
+> 具体地址顺序因 OS/架构/ASLR 而异，面试记 **职责** 即可，不必背绝对地址。
+
+### 各区域说明
+
+| 区域 | 存什么 | 谁分配/释放 | 特点 |
+|------|--------|-------------|------|
+| **栈 Stack** | 函数 **局部 auto 变量**、参数、返回地址 | 编译器插入 prologue/epilogue，**出了作用域自动回收** | **LIFO**；默认几 MB，过大数组会栈溢出 |
+| **堆 Heap** | `malloc`、**OC/Swift 对象**、**copy 后的 Block** | `free` / **ARC**（引用计数为 0） | 生命周期灵活；多线程访问要同步 |
+| **代码区 .text** | 方法的 **机器码** | 装载时映射，运行期只读 | `-[Foo bar]` 的指令在这里 |
+| **常量区 .rodata** | `"hello"`、`@"constant"`、const 全局 | 程序生命周期 | **只读**，修改会 crash |
+| **.data** | 已赋初值的全局/静态，如 `static int x = 1` | 程序生命周期 | 可读写 |
+| **BSS** | 未显式初值的全局/静态，如 `static int buf[1024]` | 启动时清零 | 不占可执行文件体积 |
+
+### OC / iOS 对应举例
+
+```objc
+// ① 代码区：下面这整段方法的机器指令
+- (void)demo {
+    // ② 栈：局部 int、指针变量 a、p
+    int a = 10;
+    Person *p = [[Person alloc] init];  // ③ p 在栈，Person 实例在堆
+
+    // ④ 常量区：@"Tom" 字符串常量（NSString 可能 Tagged Pointer 优化）
+    p.name = @"Tom";
+
+    // ⑤ 栈 Block（捕获 auto）→ copy 后变 ⑥ 堆 Block
+    void (^b)(void) = ^{ NSLog(@"%d", a); };
+
+    // ⑦ 全局区 Block：不捕获局部 auto
+    void (^g)(void) = ^{ NSLog(@"global"); };
+}
+
+static int count = 0;           // .data
+static char buffer[4096];       // BSS（未显式初始化）
+```
+
+| 面试对象 | 一般在哪 |
+|----------|----------|
+| `[[NSObject alloc] init]` | **堆** |
+| 局部 `int` / 指针变量 | **栈**（指针变量本身；指向的对象在堆） |
+| `__NSStackBlock__` | **栈** |
+| `__NSMallocBlock__` | **堆** |
+| `__NSGlobalBlock__` | **全局数据区**（不捕获 auto） |
+| 类对象 / 元类 | **堆**（运行时创建，常驻） |
+| `@""` 字符串常量 | **常量区**（小字符串可能 Tagged Pointer，不占堆） |
+| `static` 局部变量 | **全局数据区**（.data / BSS），Block 捕获其 **指针** |
+
+### 栈 vs 堆（必背对比）
+
+| | 栈 | 堆 |
+|--|-----|-----|
+| 速度 | 快（移动栈指针） | 相对慢（分配器查找） |
+| 大小 | 有限（MB 级） | 大（受设备内存限制） |
+| 生命周期 | 随 **作用域** | 随 **引用计数 / free** |
+| 线程 | **每个线程独立栈** | **进程内共享** |
+| 碎片 | 无 | 可能有 |
+
+### 易混淆
+
+| 说法 | 正误 |
+|------|------|
+| 「OC 对象在栈上」 | ❌ 对象在 **堆**，栈上只是 **指针** |
+| 「Block 都在堆上」 | ❌ 捕获 auto 的局部 Block 先在 **栈** |
+| 「常量字符串能改吗」 | ❌ `.rodata` 只读；`NSMutableString` 是堆对象 |
+| 「堆栈 = stack」 | ⚠️ 口语「堆栈」有时指 stack；和 **heap 堆** 是不同概念 |
+| 「class 的方法在对象里」 | ❌ 实例在堆；**方法实现在代码区**，类对象存 **方法列表** |
+
+### 和后续章节的关系
+
+- Block 三种类型 → [第三章 §3.2](/posts/%E7%AC%AC%E4%B8%89%E7%AB%A0block-%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)
+- ARC / weak / Side Table → [第六章](/posts/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1%E5%86%85%E5%AD%98-runloop-%E5%85%B3%E8%81%94%E7%9F%A5%E8%AF%86%E7%82%B9.html)
+- Swift 值类型栈/堆 → [Swift/01](/posts/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B.html)
+
+---
+
 ## 1.1 核心概念
 
 在 Objective-C 中，**每个对象本质上是一块内存 + 一个指向类信息的 `isa` 指针**。
@@ -320,10 +422,163 @@ flowchart TD
 | **+initialize** | 类**第一次收到消息**时调用，**父类 → 子类**，可继承（子类未实现则走父类） |
 | **KVO** | 动态创建 **NSKVONotifying_xxx 子类**，修改 `isa` 指向子类，重写 setter 触发 KVO 回调 |
 | **Method Swizzling** | 交换方法 IMP，本质改的是 **类/元类的方法列表**，所有实例共享 |
+| **isKindOfClass / isMemberOfClass** | 实例从 `obj->isa` 取类；类方法从 `class->isa` 取元类；见 [§1.5](#15-iskindofclass-与-ismemberofclass) |
 
 ---
 
-## 1.5 类结构（objc_class / objc_object）
+## 1.5 isKindOfClass 与 isMemberOfClass
+
+源码在 Apple objc4 的 `runtime/NSObject.mm`，核心：**取起点 Class → 指针 `==` 或沿 `superclass` 链向上**。
+
+### 真实源码（简化）
+
+```objc
+// ========== 类方法（receiver 是 Class 对象本身）==========
+
++ (BOOL)isMemberOfClass:(Class)cls {
+    return object_getClass((id)self) == cls;
+    // self 是类对象 → object_getClass 取的是「元类」
+}
+
++ (BOOL)isKindOfClass:(Class)cls {
+    for (Class tcls = object_getClass((id)self); tcls; tcls = tcls->superclass) {
+        if (tcls == cls) return YES;
+    }
+    return NO;
+}
+
+// ========== 实例方法（receiver 是实例对象）==========
+
+- (BOOL)isMemberOfClass:(Class)cls {
+    return [self class] == cls;
+    // [self class] 本质就是实例的 isa 指向的类
+}
+
+- (BOOL)isKindOfClass:(Class)cls {
+    for (Class tcls = [self class]; tcls; tcls = tcls->superclass) {
+        if (tcls == cls) return YES;
+    }
+    return NO;
+}
+```
+
+> 编译器常把调用优化为 `objc_opt_isKindOfClass(obj, cls)`，逻辑与实例版 `isKindOfClass` 一致，只是更快。
+
+### isa 伪代码
+
+**`object_getClass` 在干什么：**
+
+```objc
+Class object_getClass(id obj) {
+    return obj->getIsa();
+    // 实例 obj->isa → 类
+    // 类对象 obj->isa → 元类
+    // 实际还有 Tagged Pointer、KVO 子类 isa 等，面试可略
+}
+```
+
+**统一模板：**
+
+```objc
+Class getStartClass(id receiver) {
+    return receiver->isa;   // 实例 → 类；类对象 → 元类
+}
+
+BOOL isMemberOfClass(id receiver, Class cls) {
+    return getStartClass(receiver) == cls;   // 只比一次，精确匹配
+}
+
+BOOL isKindOfClass(id receiver, Class cls) {
+    for (Class t = getStartClass(receiver); t != nil; t = t->superclass) {
+        if (t == cls) return YES;            // 沿 superclass 链，不是 isa 链
+    }
+    return NO;
+}
+```
+
+### 实例 vs 类方法
+
+| | **实例方法** `-xxx` | **类方法** `+xxx` |
+|--|---------------------|-------------------|
+| **receiver** | 实例对象 | 类对象 |
+| **起点** | `obj->isa` → **类** | `class->isa` → **元类** |
+| **isMemberOfClass** | 实例类 `== cls` | 元类 `== cls` |
+| **isKindOfClass** | 沿 **类** 的 superclass 链 | 沿 **元类** 的 superclass 链 |
+
+### 查找示意
+
+**实例 `-isKindOfClass:`**
+
+```
+实例 obj
+  │  obj.isa
+  ▼
+Dog 类 ──≠ cls?──► superclass
+  ▼
+Animal 类 ──== cls?──► YES 返回
+  ▼
+NSObject 类 → nil
+```
+
+**类 `+isKindOfClass:`**
+
+```
+Person 类对象（receiver）
+  │  self.isa
+  ▼
+Person 元类 ──≠ cls?──► superclass → … → 根元类
+  ▼
+NSObject 类 ──== cls?──► 可能 YES（根元类的 superclass 是根类 NSObject）
+  ▼
+nil
+```
+
+### 经典面试题
+
+```objc
+Person *p = [[Person alloc] init];
+
+[p isKindOfClass:[Person class]];     // YES  链上有 Person
+[p isMemberOfClass:[Person class]];   // YES  p.isa == Person
+
+[p isKindOfClass:[NSObject class]];   // YES  链上有 NSObject
+[p isMemberOfClass:[NSObject class]]; // NO   精确类型是 Person
+
+[Person isKindOfClass:[Person class]];    // NO   元类链上碰不到 Person「类对象」
+[Person isMemberOfClass:[Person class]];    // NO   比的是元类 vs Person 类
+
+[NSObject isKindOfClass:[NSObject class]];    // YES  元类链最终到 NSObject 类
+[NSObject isMemberOfClass:[NSObject class]];  // NO   元类 ≠ NSObject 类对象
+```
+
+**必背对比**：`[NSObject class] isKindOfClass:` → **YES**；`isMemberOfClass:` → **NO**。
+
+### 与 `+isSubclassOfClass:` 的区别
+
+```objc
++ (BOOL)isSubclassOfClass:(Class)cls {
+    for (Class tcls = self; tcls; tcls = tcls->superclass) {
+        if (tcls == cls) return YES;
+    }
+    return NO;
+}
+```
+
+| 方法 | 起点 |
+|------|------|
+| `+isKindOfClass:` | `self->isa`（**元类**） |
+| `+isSubclassOfClass:` | `self`（**类本身**） |
+
+### 面试 30 秒版
+
+> **实例**从 `obj->isa` 取类；**类方法**从 `class->isa` 取元类。  
+> **isMemberOfClass** 只做一次指针 `==`，精确匹配。  
+> **isKindOfClass** 从起点沿 **`superclass` 链**向上，任一节点 `== cls` 即 YES。  
+> `[NSObject class] isKindOfClass:[NSObject class]` 为 YES，`isMemberOfClass` 为 NO。
+
+---
+
+## 1.6 类结构（objc_class / objc_object）
 
 ```objc
 // 简化理解
