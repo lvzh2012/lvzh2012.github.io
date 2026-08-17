@@ -1,6 +1,7 @@
 +++
 date = '2026-06-28T19:13:28+08:00'
 draft = true
+weight = 6
 title = '第六章：事件传递链（Hit-Testing）'
 tags = ["UIKit", "面试", "通用"]
 categories = ['iOS 面试']
@@ -8,7 +9,7 @@ categories = ['iOS 面试']
 
 # 第六章：事件传递链（Hit-Testing）
 
-> **学习位置**：OC 学完 [第六章 RunLoop](/posts/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1%E5%86%85%E5%AD%98-runloop-%E5%85%B3%E8%81%94%E7%9F%A5%E8%AF%86%E7%82%B9.html) / Swift 学完 [第五章扩展](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1optional-%E5%8D%8F%E8%AE%AE-%E6%B3%9B%E5%9E%8B-%E5%86%85%E5%AD%98.html) 后阅读。  
+> **学习位置**：OC 学完 [第七章 RunLoop](/posts/%E7%AC%AC%E4%B8%83%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1%E5%86%85%E5%AD%98-runloop-%E5%85%B3%E8%81%94%E7%9F%A5%E8%AF%86%E7%82%B9.html) / Swift 学完 [第五章扩展](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1optional-%E5%8D%8F%E8%AE%AE-%E6%B3%9B%E5%9E%8B-%E5%86%85%E5%AD%98.html) 后阅读。  
 > **语言无关**：UIKit 机制，OC 与 Swift **原理完全相同**，下文代码块并列给出两种语法。
 
 **传递链解决的是：触摸点落在哪个 View 上？**

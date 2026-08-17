@@ -1,14 +1,15 @@
 +++
-date = '2026-06-28T19:13:28+08:00'
+date = '2026-08-17T22:24:05+08:00'
 draft = true
-title = '第三章：Block 面试八股'
+weight = 4
+title = '第四章：Block 面试八股'
 tags = ["Objective-C", "Runtime", "面试"]
 categories = ['iOS 面试']
 +++
 
-# 第三章：Block 面试八股
+# 第四章：Block 面试八股
 
-## 3.1 Block 是什么？
+## 4.1 Block 是什么？
 
 Block 是 **C 语言层面的闭包**，可以 **捕获外部变量**，在 OC/Swift 里广泛用于：
 
@@ -30,7 +31,7 @@ block();
 
 ---
 
-## 3.2 Block 的三种类型（必背）
+## 4.2 Block 的三种类型（必背）
 
 | 类型 | 存储位置 | 创建方式 | 是否需要 copy 到堆 |
 |------|----------|----------|-------------------|
@@ -92,7 +93,7 @@ void (^autoCopyBlock)(void) = ^{
 
 **`@property copy` 在 ARC 下还要吗？** 要——语义是「我要独立副本」；Block 仍可能从外部传入；且 copy 对 Global Block 是 no-op，对堆 Block 可能 retain，**无害且正确**。
 
-## 3.3 Block 内存布局（简化）
+## 4.3 Block 内存布局（简化）
 
 ```
 ┌─────────────────────────────────────┐
@@ -112,7 +113,7 @@ void (^autoCopyBlock)(void) = ^{
 
 ---
 
-## 3.4 变量捕获规则（高频）
+## 4.4 变量捕获规则（高频）
 
 | 变量类型 | 捕获方式 | Block 内能否修改 |
 |----------|----------|------------------|
@@ -142,7 +143,7 @@ void (^block2)(void) = ^{
 
 ---
 
-## 3.5 循环引用（必考）
+## 4.5 循环引用（必考）
 
 ### 典型场景
 
@@ -187,7 +188,7 @@ self ──strong──► block（堆）
 
 ---
 
-## 3.6 Block 与 copy
+## 4.6 Block 与 copy
 
 | 情况 | 行为 |
 |------|------|
@@ -203,9 +204,9 @@ self ──strong──► block（堆）
 
 ---
 
-## 3.7 Block 与 GCD / 多线程
+## 4.7 Block 与 GCD / 多线程
 
-> GCD 细节见 [第四章 多线程面试八股](/posts/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)。
+> GCD 细节见 [第五章 多线程面试八股](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)。
 
 ```objc
 // Block 是 GCD 的任务载体
@@ -222,7 +223,7 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 
 ---
 
-## 3.8 面试 Q&A
+## 4.8 面试 Q&A
 
 ### Q1：Block 栈转堆的时机？
 
@@ -272,7 +273,7 @@ NSLog(@"%d", a);  // 输出 3
 
 ---
 
-## 3.9 复习要点
+## 4.9 复习要点
 
 1. 三种 Block 类型 + 存储位置
 2. auto 值捕获 vs `__block` 引用捕获

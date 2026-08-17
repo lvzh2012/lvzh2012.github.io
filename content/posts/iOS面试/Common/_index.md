@@ -7,6 +7,3 @@ categories = ['iOS 面试']
 +++
 
 UIKit 触摸、网络、性能、架构 …
-
-> 本地预览：`hugo server -D`（`-D` 包含草稿）
-> 公开发布：`draft = true` 的文章 **不会** 出现在生产构建中。

@@ -1,6 +1,7 @@
 +++
 date = '2026-06-28T19:13:28+08:00'
 draft = true
+weight = 7
 title = '第七章：事件响应链（Responder Chain）'
 tags = ["UIKit", "面试", "通用"]
 categories = ['iOS 面试']

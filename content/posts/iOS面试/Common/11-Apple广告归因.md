@@ -1,6 +1,7 @@
 +++
 date = '2026-07-15T20:40:46+08:00'
 draft = true
+weight = 11
 title = '第十一章：Apple 广告归因（大厂高频 · 隐私时代下的必知）'
 tags = ["UIKit", "面试", "通用"]
 categories = ['iOS 面试']
@@ -194,6 +195,50 @@ iAd.framework → deprecated in iOS 10
 ```
 
 含 API `ADClient.addImpressionIdentifier(...)` 等，现已不可用，面试中只需知道 **iAd 是前身** 即可。
+
+### 11.2.5 第三方归因平台（MMP：AppsFlyer / Adjust）
+
+**MMP（Mobile Measurement Partner）**：第三方移动归因/衡量平台，充当广告主与广告平台之间的「中立裁判」。
+
+```
+广告主（App 开发者）
+    │
+    ├─ 买量 → 广告平台（AppLovin / Meta / Google / Pangle ...）
+    │
+    └─ 衡量 → MMP（AppsFlyer / Adjust ...）
+                ├─ 归因：判断激活来自哪个广告平台 / 广告活动
+                ├─ 汇总：对接各广告网络 + SKAdNetwork 回传，统一报表
+                └─ 优化：把付费用户数据回传给广告平台做自动投放优化
+```
+
+#### 核心职责
+
+| 职责 | 说明 |
+|------|------|
+| 归因（核心） | 点击归因、展示归因，解决"广告平台自己说自己好"的问题 |
+| 数据统一 | 各广告平台回传汇总到一处，统一上报 App 内事件（注册/付费/留存） |
+| 投放优化 | 映射 conversion value → 回传付费用户数据 → 广告平台做 Lookalike / ROAS 优化 |
+| 辅助能力 | 深度链接（Deep Linking）、再营销受众、防作弊（Fraud Detection）、成本汇总 |
+
+#### 与广告平台的区别
+
+> **MMP 不卖广告**，广告平台卖流量；MMP 是帮你**衡量**这些流量效果的第三方。
+
+#### 与 SKAdNetwork 的关系
+
+- SKAN 的 postback 直接发给**广告平台**，开发者自己看不到
+- MMP 承担 SKAN 的「代收转报」：整合各平台聚合数据，开发者通过 MMP 才能看到归因汇总
+- SKAN 4.0 之前一次安装只产生一次回传，MMP 同样只能拿到聚合级数据，无法定位具体用户
+
+#### 常见 MMP
+
+| 平台 | 特点 |
+|------|------|
+| AppsFlyer | 海外最主流，归因+SKAN 支持完善 |
+| Adjust | 老牌归因平台，被 AppLovin 收购 |
+| Singular | 偏投放优化/成本聚合 |
+| Kochava | 侧重防作弊与数据合规 |
+| Branch | 偏深度链接/归因一体 |
 
 ---
 

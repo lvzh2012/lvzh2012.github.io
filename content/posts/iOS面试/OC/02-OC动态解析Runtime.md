@@ -1,6 +1,7 @@
 +++
 date = '2026-06-28T19:13:28+08:00'
 draft = true
+weight = 2
 title = '第二章：Objective-C 动态解析（Runtime）'
 tags = ["Objective-C", "Runtime", "面试"]
 categories = ['iOS 面试']
@@ -281,4 +282,4 @@ Normal Forwarding（第三次补救）
 
 ### Q4：综合题入口
 
-详见 [第八章 Q1](/posts/%E7%AC%AC%E5%85%AB%E7%AB%A0%E7%BB%BC%E5%90%88%E4%B8%B2%E8%81%94%E9%A2%98%E9%AB%98%E9%A2%91.html)。
+详见 [第九章 Q1](/posts/%E7%AC%AC%E4%B9%9D%E7%AB%A0%E7%BB%BC%E5%90%88%E4%B8%B2%E8%81%94%E9%A2%98%E9%AB%98%E9%A2%91.html)。

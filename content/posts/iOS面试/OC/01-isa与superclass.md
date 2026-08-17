@@ -1,6 +1,7 @@
 +++
 date = '2026-06-28T19:13:28+08:00'
 draft = true
+weight = 1
 title = '第一章：isa 与 superclass'
 tags = ["Objective-C", "Runtime", "面试"]
 categories = ['iOS 面试']
@@ -104,8 +105,8 @@ static char buffer[4096];       // BSS（未显式初始化）
 
 ### 和后续章节的关系
 
-- Block 三种类型 → [第三章 §3.2](/posts/%E7%AC%AC%E4%B8%89%E7%AB%A0block-%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)
-- ARC / weak / Side Table → [第六章](/posts/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1%E5%86%85%E5%AD%98-runloop-%E5%85%B3%E8%81%94%E7%9F%A5%E8%AF%86%E7%82%B9.html)
+- Block 三种类型 → [第四章 §4.2](/posts/%E7%AC%AC%E5%9B%9B%E7%AB%A0block-%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)
+- ARC / weak / Side Table → [第七章](/posts/%E7%AC%AC%E4%B8%83%E7%AB%A0%E6%89%A9%E5%B1%95%E5%85%AB%E8%82%A1%E5%86%85%E5%AD%98-runloop-%E5%85%B3%E8%81%94%E7%9F%A5%E8%AF%86%E7%82%B9.html)
 - Swift 值类型栈/堆 → [Swift/01](/posts/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B.html)
 
 ---
@@ -295,8 +296,8 @@ Apple Silicon 的 **arm64e** 设备上，类信息可能打包进 `shiftcls_and_
 ### 关联知识点
 
 - **Tagged Pointer**：小对象（如 `@1`、`@YES`、短 NSString）不分配堆内存，数据直接编码在指针里，`isa` 指向特殊 tagged class
-- **Side Table（散列表）**：当 retain count 过大或对象被 weak 引用时，额外信息存到 side table
-- **weak 表**：`objc_storeWeak` 维护 weak 指针与对象的映射，对象 dealloc 时置 nil
+- **Side Table（散列表）**：当 retain count 过大或对象被 weak 引用时，额外信息存到 side table；内部含 `slock`（锁）、`refcnts`（计数表）、`weak_table`（weak 表）
+- **weak 表**：`objc_storeWeak` 维护弱引用映射。**两层哈希**：外层 key = 被引用对象（referent），value = `weak_entry_t`；内层 referrers 按「弱指针地址」哈希，存该对象所有弱指针。对象 dealloc 时遍历全部置 nil
 
 ---
 

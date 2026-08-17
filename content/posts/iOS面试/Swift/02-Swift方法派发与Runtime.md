@@ -1,6 +1,7 @@
 +++
 date = '2026-06-28T19:13:28+08:00'
 draft = true
+weight = 2
 title = '第二章：Swift 方法派发与 Runtime'
 tags = ["Swift", "面试"]
 categories = ['iOS 面试']
@@ -204,7 +205,7 @@ class Person: NSObject {
 }
 ```
 
-**KVO**：必须 `@objc dynamic` + `NSObject` 子类，底层仍是 isa-swizzling + 子类 setter（见 [OC/08 Q2](/posts/%E7%AC%AC%E5%85%AB%E7%AB%A0%E7%BB%BC%E5%90%88%E4%B8%B2%E8%81%94%E9%A2%98%E9%AB%98%E9%A2%91.html)）。
+**KVO**：必须 `@objc dynamic` + `NSObject` 子类，底层仍是 isa-swizzling + 子类 setter（见 [OC 第三章 KVO](/posts/%E7%AC%AC%E4%B8%89%E7%AB%A0kvo-%E5%8E%9F%E7%90%86%E5%8A%A8%E6%80%81%E5%AD%90%E7%B1%BB--isa-swizzling.html)）。
 
 ---
 

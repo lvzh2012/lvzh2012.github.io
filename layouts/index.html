@@ -1,0 +1,41 @@
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $interview := where $posts "Params.categories" "intersect" (slice "iOS 面试") }}
+{{ $pages := $posts | complement $interview }}
+<section class="hero page-container">
+  <h1 class="hero__title">{{ .Site.Title }}</h1>
+  <p class="hero__subtitle">{{ .Site.Params.hero.subtitle | default .Site.Params.description }}</p>
+</section>
+
+<section class="home-layout page-container">
+  <div class="home-posts">
+    <h2 class="section-title">Latest posts</h2>
+    <div class="home-posts__list">
+      {{ $paginator := .Paginate ($pages.ByDate.Reverse) }}
+      {{ range $index, $page := $paginator.Pages }}
+      <div class="post-card-wrapper" id="post-{{ $index }}" data-href="{{ $page.RelPermalink }}">
+        {{ partial "post-card.html" $page }}
+      </div>
+      {{ end }}
+    </div>
+    {{ partial "pagination.html" . }}
+  </div>
+
+  <aside class="home-sidebar" aria-label="文章列表">
+    <p class="home-sidebar__label">文章导航</p>
+    <nav class="home-sidebar__nav">
+      {{ $paginator := .Paginate ($pages.ByDate.Reverse) }}
+      {{ range $index, $page := $paginator.Pages }}
+      <a class="home-sidebar__item" href="#post-{{ $index }}" data-href="{{ $page.RelPermalink }}" data-index="{{ $index }}">
+        <span class="home-sidebar__title">{{ $page.Title }}</span>
+        <time class="home-sidebar__date" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "01/02" }}</time>
+      </a>
+      {{ end }}
+    </nav>
+  </aside>
+</section>
+
+{{ with resources.Get "js/home-sidebar.js" | minify | fingerprint }}
+<script src="{{ .RelPermalink }}" defer></script>
+{{ end }}
+{{ end }}
