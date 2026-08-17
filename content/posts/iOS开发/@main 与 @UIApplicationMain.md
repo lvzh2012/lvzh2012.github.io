@@ -13,7 +13,7 @@ cover = "https://plus.unsplash.com/premium_photo-1673292293042-cafd9c8a3ab3?q=80
 
 # @main 与 @UIApplicationMain 的区别
 
-> **文档说明**：本文档详细对比 iOS 开发中两种应用程序入口点标记方式的区别，帮助开发者理解并正确选择使用。
+> **文档说明**：本文档详细对比 iOS 开发中两种应用程序入口点标记方式的区别，并深入讲解如何自定义应用入口（UIKit 与 SwiftUI 两套玩法），帮助开发者理解并正确使用。
 
 ---
 
@@ -41,17 +41,17 @@ cover = "https://plus.unsplash.com/premium_photo-1673292293042-cafd9c8a3ab3?q=80
 ### 核心特点
 
 - **专用性**：专门为 UIKit/AppKit 应用程序设计，不能用于其他类型的程序
-- **自动生成代码**：编译器会自动生成 `main.swift` 文件（虚拟的），包含 `UIApplicationMain` 函数调用
-- **限制性**：只能用于应用程序入口，无法自定义启动流程
+- **自动合成入口**：编译器自动合成入口代码，内部调用 `UIApplicationMain` 函数
+- **限制性**：只能用于应用程序入口，无法自定义启动流程（主类固定为 nil）
 
 ### 工作原理
 
 当使用 `@UIApplicationMain` 时，Swift 编译器会执行以下步骤：
 
-1. 自动生成一个虚拟的 `main.swift` 文件
-2. 在该文件中调用 `UIApplicationMain(_:_:_:_:)` 函数
-3. 创建 `UIApplication` 实例
-4. 将标记的类设置为应用程序代理（AppDelegate）
+1. 合成一个入口（相当于虚拟的 `main`）
+2. 调用 `UIApplicationMain(_:_:_:_:)` 函数
+3. 以 `nil` 作为主类（`UIApplication` 或其子类），以被标记的类作为应用代理（AppDelegate）
+4. 创建 `UIApplication` 实例并启动事件循环
 
 ### 使用示例
 
@@ -167,6 +167,24 @@ struct MyTool {
 
 ---
 
+## 🎯 为什么 `UIApplicationMain` 函数没有被废弃？
+
+废弃的是 `@UIApplicationMain` **属性**，而 `UIApplicationMain` 这个 C **函数**至今依然可用、未标记 deprecated。原因如下：
+
+1. **它仍是 UIKit 应用的"真实入口"**：`@main`/`@UIApplicationMain` 只是编译器的糖衣，`@main` 合成的代码底层照样调用 `UIApplicationMain`。一个仍在幕后工作的函数不会被废弃，否则就自相矛盾了。
+
+2. **废弃的是"属性"，不是"函数"**：`@UIApplicationMain` 属性在 iOS 14 被标记废弃，目的是统一入口写法（和 SwiftUI 的 `@main` 对齐）；函数本身没有替代物。
+
+3. **兼容性包袱**：大量存量代码直接调用它（`main.swift`、`main.m`、游戏/工具类工程），废弃它会让老工程灌满警告，收益为零。
+
+4. **它提供不可替代的能力**：默认入口无法指定自定义 `UIApplication` 主类（`@main` 合成代码传 nil），想定制就必须直接调这个函数。一个"无法被替代"的 API 没有废弃的动机。
+
+5. **苹果的废弃惯例**：只有存在更优替代方案时才标记废弃。Swift 里很多底层 C API（如 `dispatch_main`、`CFRunLoopRun`）同理——语言层糖化了，但底层函数永存。
+
+> 签名 `UIApplicationMain(Int32, UnsafeMutablePointer<UnsafeMutablePointer<Int8>>!, String?, String?)` 中两个 `String?` 可空参数（主类/代理类），正是为"自定义"保留的缺口。
+
+---
+
 ## 🔄 迁移指南
 
 ### 为什么需要迁移？
@@ -222,83 +240,159 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ---
 
-## 💡 实际应用场景
+## 💡 UIKit 入口自定义（实战）
 
-### 场景 1：传统 UIKit 应用程序
+`@main` 的原理：编译器生成代码调用该类型上的 `static func main()`。`UIApplicationDelegate` 的协议扩展提供了默认实现——等价于 `UIApplicationMain(argc, argv, nil, NSStringFromClass(self))`，**第三个参数（自定义 Application 类）写死 nil**。想自定义，只需自己接管 `main()`。
 
-在传统的 UIKit 应用程序中，使用 `@main` 标记 `AppDelegate`：
+### 方案 A：main.swift（最接近原始 UIApplicationMain 的玩法）
+
+新建 `main.swift`，删掉 AppDelegate 上的 `@UIApplicationMain`/`@main`（main.swift 有顶层代码就是入口，`@main` 与它不能共存）：
 
 ```swift
+// main.swift
 import UIKit
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-    
-    func application(_ application: UIApplication, 
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // 创建窗口
-        window = UIWindow(frame: UIScreen.main.bounds)
-        
-        // 设置根视图控制器
-        window?.rootViewController = ViewController()
-        
-        // 显示窗口
-        window?.makeKeyAndVisible()
-        
-        return true
+// 自定义 Application：可重写 sendEvent 做全局触摸统计/超时监控等
+final class MyApplication: UIApplication {
+    override func sendEvent(_ event: UIEvent) {
+        // 例如：记录最后触摸时间、防崩溃过滤非法事件
+        super.sendEvent(event)
     }
 }
+
+UIApplicationMain(
+    CommandLine.argc,                     // 参数
+    CommandLine.unsafeArgv,
+    NSStringFromClass(MyApplication.self), // 主类：nil 或自定义
+    NSStringFromClass(AppDelegate.self)    // 代理类
+)
 ```
 
-### 场景 2：SwiftUI 应用程序
-
-在 SwiftUI 应用程序中，**必须**使用 `@main` 标记符合 `App` 协议的结构体：
+### 方案 B：保留 @main，自己写 static func main()
 
 ```swift
-import SwiftUI
-
 @main
-struct MyApp: App {
-    @StateObject private var dataModel = DataModel()
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(dataModel)
-        }
-    }
-}
-```
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
-### 场景 3：自定义启动逻辑
-
-`@main` 支持自定义启动逻辑，这是 `@UIApplicationMain` 无法实现的：
-
-```swift
-import UIKit
-
-@main
-enum AppLauncher {
+    // 编译器优先用类型内自己的声明，覆盖掉协议扩展的默认实现
     static func main() {
-        // 自定义启动逻辑
-        let app = UIApplication.shared
-        let delegate = AppDelegate()
-        app.delegate = delegate
-        
-        // 执行自定义初始化
-        delegate.customSetup()
-        
-        // 启动应用程序
-        _ = UIApplicationMain(
+        UIApplicationMain(
             CommandLine.argc,
             CommandLine.unsafeArgv,
-            nil,
+            NSStringFromClass(MyApplication.self),
             NSStringFromClass(AppDelegate.self)
         )
     }
 }
 ```
+
+比方案 A 少一个文件，但语义略隐晦，实际工程里两种都常见。
+
+### 方案 B 抽取到单独文件
+
+想把入口逻辑挪出 AppDelegate，但**不能叫 `main.swift`**（顶层代码与 `@main` 互斥），用 extension 即可：
+
+```swift
+// AppDelegate.swift —— 保持 @main
+@main
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+    // ... 只保留业务代理逻辑
+}
+```
+
+```swift
+// AppEntry.swift —— 任意文件名，唯独不能叫 main.swift
+import UIKit
+
+extension AppDelegate {
+    static func main() {
+        UIApplicationMain(
+            CommandLine.argc,
+            CommandLine.unsafeArgv,
+            NSStringFromClass(MyApplication.self),
+            NSStringFromClass(AppDelegate.self)
+        )
+    }
+}
+```
+
+原理：`@main` 要求该类型有一个 `static func main()`，**类型自身的声明（含 extension）优先于协议扩展的默认实现**，入口逻辑被完整挪到独立文件，AppDelegate 保持干净。
+
+### 两条路对比
+
+| 方案 | 入口文件 | @main | 效果 |
+| :--: | :------: | :---: | :--: |
+|  A   | `main.swift`（顶层代码） | 不能用 | 最接近原 UIApplicationMain |
+|  B   | 任意文件 + `extension AppDelegate` | 保留 | 单文件逻辑迁移、改动最小 |
+
+---
+
+## 💡 SwiftUI 的 @main 入口重写
+
+SwiftUI 的 `@main` 机制与 UIKit 版同源：`App` 协议扩展里提供了一个 `static func main()`（内部走 UIKit 生命周期 + SwiftUI 场景托管）。按定制深度分三层：
+
+### 层次 1：最常用——不改 main，注入 UIKit 生命周期钩子
+
+```swift
+@main
+struct MyApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    var body: some Scene {
+        WindowGroup { ContentView() }
+    }
+}
+```
+
+`AppDelegate` 里照常写 `didFinishLaunching` 等 UIKit 回调，这是 SwiftUI 官方支持的"接 UIKit"姿势。
+
+### 层次 2：自定义 UIApplication 子类——靠 Info.plist，不碰 main
+
+SwiftUI 入口里没有传主类的参数，但 `UIApplicationMain` 会读 plist 里的 `NSPrincipalClass`：
+
+```xml
+<key>NSPrincipalClass</key>
+<string>$(PRODUCT_MODULE_NAME).MyApplication</string>
+```
+
+```swift
+final class MyApplication: UIApplication {
+    override func sendEvent(_ event: UIEvent) {
+        super.sendEvent(event)  // 全局触摸统计、超时监控等
+    }
+}
+```
+
+SwiftUI 的隐藏启动代码照常跑，只换掉了 Application 类。
+
+### 层次 3：真·重写 main()——前置初始化后仍走默认启动
+
+```swift
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup { ContentView() }
+    }
+}
+
+// 单独文件（别叫 main.swift）
+extension MyApp {
+    static func main() {
+        // 启动前的自定义逻辑：日志系统、启动参数解析、环境探测……
+        Bootstrap.initialize()
+
+        // 关键：调协议扩展的默认实现，而不是递归调自己
+        (Self.self as any App).main()
+    }
+}
+```
+
+`(Self.self as any App).main()` 是"类型自己的 main 覆盖协议扩展默认实现"后的逃生通道——通过 `any App` 存在类型调用，精确命中协议扩展的实现，不会递归。
+
+### SwiftUI 的两个坑
+
+- **别用 main.swift 顶层代码全接管**：SwiftUI 的场景托管、`WindowGroup` 的 lifecycle 都在它隐藏的 AppDelegate 里，自己跑 `UIApplicationMain` 会丢失这些行为
+- `@main` 与 `main.swift` 互斥，SwiftUI 项目一律用 `@main` + 上面三层的某一种组合
 
 ---
 
@@ -306,8 +400,9 @@ enum AppLauncher {
 
 ### 核心要点
 
-- **@UIApplicationMain**：旧的方式，专门用于 UIKit 应用程序，功能有限，已弃用
+- **@UIApplicationMain**：旧的方式，专门用于 UIKit 应用程序，功能有限，属性已弃用（但底层 `UIApplicationMain` 函数永存，是唯一能自定义主类的通道）
 - **@main**：现代方式，通用入口点标记，支持所有类型的程序，**推荐使用**
+- **自定义入口三条路**：`main.swift` 顶层代码（全接管）、类型内自定义 `static func main()`（半接管）、`extension` 单独文件（逻辑分离 + 保持 @main）
 
 ### 推荐做法
 
@@ -322,8 +417,9 @@ enum AppLauncher {
 
 1. ✅ **统一使用 `@main`**：在新项目和现有项目中统一使用 `@main`
 2. ✅ **保持代码现代化**：利用 `@main` 的灵活性实现更好的代码结构
-3. ✅ **利用自定义能力**：在需要时使用 `@main` 的自定义启动逻辑功能
+3. ✅ **利用自定义能力**：自定义 `UIApplication` 时优先用方案 B 的 extension 写法
 4. ✅ **及时迁移**：将现有项目从 `@UIApplicationMain` 迁移到 `@main`
+5. ⚠️ **SwiftUI 别碰 main.swift**：需要自定义入口用 `@UIApplicationDelegateAdaptor` / `NSPrincipalClass` / 自定义 `static func main()` 三层方案
 
 ---
 
@@ -333,4 +429,3 @@ enum AppLauncher {
 - [Apple Developer Documentation](https://developer.apple.com/documentation/swift/main) - Swift `@main` 属性官方文档
 
 ---
-
