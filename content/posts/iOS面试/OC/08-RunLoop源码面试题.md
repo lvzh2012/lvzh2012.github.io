@@ -15,30 +15,34 @@ categories = ['iOS 面试']
 
 ## 8.0 高频考点速查（面试前先过一遍）
 
-| 考点 | 一句话答案 | 章节 |
-|------|-----------|------|
-| **RunLoop 是什么** | 线程的事件循环：取事件 → 调回调 → 休眠等待 → 被唤醒 → 循环 | §8.1 |
-| **与线程关系** | **一一对应**；主线程自动 run，子线程默认不 run | Q9 |
-| **为何不忙等** | 休眠前 **`mach_msg` 进内核态**，零 CPU | Q3 |
-| **Source0 vs Source1** | Source0 **手动 WakeUp**；Source1 **mach_port 自动唤醒** | §8.4、Q6 |
-| **Mode 隔离** | 只处理**当前 Mode** 下的 Source/Timer；滑动切 **UITracking** | Q4、Q21 |
-| **CommonModes** | 不是真 Mode，是 **`_commonModes` 标记集**，item 同步到多个 Mode | Q13 |
-| **AutoreleasePool** | **Entry push**；**BeforeWaiting pop+push**；**Exit pop** | Q1 |
-| **主队列 GCD** | `dispatch_async(main)` → **dispatch source** → `__CFRunLoopDoBlocks` | Q7、Q22 |
-| **afterDelay** | 底层是 **Timer**，不是 Source | Q7 |
-| **scheduledTimer 陷阱** | 只加到 **Default Mode**，滑动时 Timer 停 | Q19 |
-| **子线程保活** | 先 **addPort/addTimer**，再 `[runLoop run]` | Q9 |
-| **卡顿监控** | Observer 测 **BeforeSources → AfterWaiting** 耗时 | Q8、Q12 |
+
+| 考点                     | 一句话答案                                                                | 章节      |
+| ---------------------- | -------------------------------------------------------------------- | ------- |
+| **RunLoop 是什么**        | 线程的事件循环：取事件 → 调回调 → 休眠等待 → 被唤醒 → 循环                                  | §8.1    |
+| **与线程关系**              | **一一对应**；主线程自动 run，子线程默认不 run                                        | Q9      |
+| **为何不忙等**              | 休眠前 `mach_msg` **进内核态**，零 CPU                                        | Q3      |
+| **Source0 vs Source1** | Source0 **手动 WakeUp**；Source1 **mach_port 自动唤醒**                     | §8.4、Q6 |
+| **Mode 隔离**            | 只处理**当前 Mode** 下的 Source/Timer；滑动切 **UITracking**                    | Q4、Q21  |
+| **CommonModes**        | 不是真 Mode，是 `_commonModes` **标记集**，item 同步到多个 Mode                    | Q13     |
+| **AutoreleasePool**    | **Entry push**；**BeforeWaiting pop+push**；**Exit pop**               | Q1      |
+| **主队列 GCD**            | `dispatch_async(main)` → **dispatch source** → `__CFRunLoopDoBlocks` | Q7、Q22  |
+| **afterDelay**         | 底层是 **Timer**，不是 Source                                              | Q7      |
+| **scheduledTimer 陷阱**  | 只加到 **Default Mode**，滑动时 Timer 停                                     | Q19     |
+| **子线程保活**              | 先 **addPort/addTimer**，再 `[runLoop run]`                             | Q9      |
+| **卡顿监控**               | Observer 测 **BeforeSources → AfterWaiting** 耗时                       | Q8、Q12  |
+
 
 ---
 
 ## 8.1 RunLoop 概述
 
-| 主题 | 要点 |
-|------|------|
-| **RunLoop** | 触摸、Timer、Source 由 RunLoop 驱动；**主线程默认开启**；子线程需 `run` |
-| **AutoreleasePool** | `AutoreleasePoolPage` 双向链表；RunLoop **休眠/唤醒** 时 drain |
-| **与线程** | 每条线程最多一个 RunLoop（**存在线程 → RunLoop 一一对应**）；主线程 RunLoop 在 `main` 里自动 run |
+
+| 主题                  | 要点                                                                     |
+| ------------------- | ---------------------------------------------------------------------- |
+| **RunLoop**         | 触摸、Timer、Source 由 RunLoop 驱动；**主线程默认开启**；子线程需 `run`                    |
+| **AutoreleasePool** | `AutoreleasePoolPage` 双向链表；RunLoop **休眠/唤醒** 时 drain                   |
+| **与线程**             | 每条线程最多一个 RunLoop（**存在线程 → RunLoop 一一对应**）；主线程 RunLoop 在 `main` 里自动 run |
+
 
 ```
 主线程 RunLoop（UIApplicationMain 内 CFRunLoopRun）
@@ -49,7 +53,7 @@ categories = ['iOS 面试']
   └── 休眠前 / 唤醒后 → drain AutoreleasePool
 ```
 
-**生活化理解**：RunLoop 像「前台接待员」——没客人时在 **`mach_msg` 里打盹**（不占 CPU）；有触摸、Timer、GCD 主队列任务等「客人」敲门时被唤醒，按固定流程接待一轮，然后再睡。
+**生活化理解**：RunLoop 像「前台接待员」——没客人时在 `mach_msg` **里打盹**（不占 CPU）；有触摸、Timer、GCD 主队列任务等「客人」敲门时被唤醒，按固定流程接待一轮，然后再睡。
 
 ---
 
@@ -158,13 +162,15 @@ struct __CFRunLoopSource {
 
 ## 8.4 Source0 vs Source1 源码区别
 
-| | Source0 | Source1 |
-|--|---------|---------|
-| 底层 | 应用层事件，**不依赖 mach_port** | 基于 **mach_port** 的内核事件 |
-| 触发 | 手动 `CFRunLoopSourceSignal` + **`CFRunLoopWakeUp`** 唤醒 | **mach_msg 自动唤醒** RunLoop |
-| 典型场景 | 触摸事件（IOKit 回调后包装为 Source0）、`performSelector` | CFMessagePort、mach port 通信、**原始 HID 触摸消息** |
-| 源码生成 | `__CFRunLoopSourceCreate` 时 **`order=0`** | **`order=-1`** |
-| 处理时机 | ④ 步 `__CFRunLoopDoSources0` | ⑨ 步收到 port 消息后回调 |
+
+|      | Source0                                           | Source1                                    |
+| ---- | ------------------------------------------------- | ------------------------------------------ |
+| 底层   | 应用层事件，**不依赖 mach_port**                           | 基于 **mach_port** 的内核事件                     |
+| 触发   | 手动 `CFRunLoopSourceSignal` + `CFRunLoopWakeUp` 唤醒 | **mach_msg 自动唤醒** RunLoop                  |
+| 典型场景 | 触摸事件（IOKit 回调后包装为 Source0）、`performSelector`      | CFMessagePort、mach port 通信、**原始 HID 触摸消息** |
+| 源码生成 | `__CFRunLoopSourceCreate` 时 `order=0`             | `order=-1`                                 |
+| 处理时机 | ④ 步 `__CFRunLoopDoSources0`                       | ⑨ 步收到 port 消息后回调                           |
+
 
 **Source0 完整三步（必背）**：
 
@@ -248,15 +254,17 @@ RunLoop **不会忙等**。休眠前调 `mach_msg`：
 mach_msg(msg, MACH_RCV_MSG, 0, sizeof(msg), port, timeout, MACH_MSG_TIMEOUT_NONE);
 ```
 
-| 对比 | `while(1) {}` 忙等 | RunLoop + `mach_msg` |
-|------|-------------------|----------------------|
-| CPU | **占满时间片** | **0 占用**（内核挂起线程） |
-| 唤醒 | 无法被事件唤醒 | port 消息 / Timer / WakeUp |
-| 适用 | ❌ 错误做法 | ✅ 事件驱动线程 |
+
+| 对比  | `while(1) {}` 忙等 | RunLoop + `mach_msg`     |
+| --- | ---------------- | ------------------------ |
+| CPU | **占满时间片**        | **0 占用**（内核挂起线程）         |
+| 唤醒  | 无法被事件唤醒          | port 消息 / Timer / WakeUp |
+| 适用  | ❌ 错误做法           | ✅ 事件驱动线程                 |
+
 
 - 线程在 **内核态休眠**，不消耗 CPU
 - 收到端口消息（Source1）、Timer 超时、`CFRunLoopWakeUp` → `mach_msg` 返回
-- **`CFRunLoopWakeUp`** 本质是向 RunLoop 私有 wake port 发一条 **空 mach 消息**，让正在 ⑦ 步睡眠的线程立刻返回
+- `CFRunLoopWakeUp` 本质是向 RunLoop 私有 wake port 发一条 **空 mach 消息**，让正在 ⑦ 步睡眠的线程立刻返回
 
 ---
 
@@ -264,13 +272,15 @@ mach_msg(msg, MACH_RCV_MSG, 0, sizeof(msg), port, timeout, MACH_MSG_TIMEOUT_NONE
 
 ### iOS 系统定义的 Mode
 
-| Mode | 用途 |
-|------|------|
-| `NSDefaultRunLoopMode` / `kCFRunLoopDefaultMode` | 默认状态（**同一 CFString**） |
-| `UITrackingRunLoopMode` | **ScrollView 滑动时**系统切换到此 Mode |
-| `NSRunLoopCommonModes` | **不是真 Mode**，是 `_commonModes` 标记集 |
-| `GSEventReceiveRunLoopMode` | 系统内部，处理图形事件 |
-| `kCFRunLoopCommonModes` | CF 层 CommonModes 常量 |
+
+| Mode                                             | 用途                                |
+| ------------------------------------------------ | --------------------------------- |
+| `NSDefaultRunLoopMode` / `kCFRunLoopDefaultMode` | 默认状态（**同一 CFString**）             |
+| `UITrackingRunLoopMode`                          | **ScrollView 滑动时**系统切换到此 Mode     |
+| `NSRunLoopCommonModes`                           | **不是真 Mode**，是 `_commonModes` 标记集 |
+| `GSEventReceiveRunLoopMode`                      | 系统内部，处理图形事件                       |
+| `kCFRunLoopCommonModes`                          | CF 层 CommonModes 常量               |
+
 
 ### CommonModes 实现原理（源码）
 
@@ -313,7 +323,7 @@ _commonModes = { kCFRunLoopDefaultMode, UITrackingRunLoopMode }
 
 1. **RunLoop BeforeWaiting**：每轮循环休眠前 **pop + push**（主线程最常用）
 2. **RunLoop Exit**：RunLoop 退出时 **最终 pop**
-3. **手动 `@autoreleasepool {}`**：作用域结束 pop；**子线程无 RunLoop 时必须靠这个**
+3. **手动** `@autoreleasepool {}`：作用域结束 pop；**子线程无 RunLoop 时必须靠这个**
 
 RunLoop 每轮循环**休眠前** pop + push 一次；退出时最终 pop。线程退出时也 drain。
 
@@ -328,9 +338,9 @@ RunLoop 每轮循环**休眠前** pop + push 一次；退出时最终 pop。线�
 
 ### Q3：RunLoop 为什么不会导致 CPU 忙等？（源码原理）
 
-RunLoop **休眠前调用 `mach_msg`** 系统调用，让线程进入**内核态等待**，此时线程 **不占用 CPU 时间片**。被 port/Timer/WakeUp 唤醒后才回到用户态继续执行。
+RunLoop **休眠前调用** `mach_msg` 系统调用，让线程进入**内核态等待**，此时线程 **不占用 CPU 时间片**。被 port/Timer/WakeUp 唤醒后才回到用户态继续执行。
 
-所以即使主线程 RunLoop 一直在 `CFRunLoopRun`，空闲时 **CPU 占用率接近 0**——因为它在 **`mach_msg` 里睡觉**，不是 `while(1)` 空转。
+所以即使主线程 RunLoop 一直在 `CFRunLoopRun`，空闲时 **CPU 占用率接近 0**——因为它在 `mach_msg` **里睡觉**，不是 `while(1)` 空转。
 
 ---
 
@@ -338,7 +348,7 @@ RunLoop **休眠前调用 `mach_msg`** 系统调用，让线程进入**内核态
 
 每个 `CFRunLoopMode` 维护独立的 `_sources0`、`_sources1`、`_timers`、`_observers`、`_portSet`。
 
-RunLoop **只处理 `_currentMode` 下这五类事件**，其他 Mode 里的 Timer/Source **本轮完全忽略**。
+RunLoop **只处理** `_currentMode` **下这五类事件**，其他 Mode 里的 Timer/Source **本轮完全忽略**。
 
 **例子**：Timer 注册在 `NSDefaultRunLoopMode`，滑动时 `_currentMode == UITrackingRunLoopMode` → **Timer 不 fire**（不是销毁，是 **Mode 不匹配**）。
 
@@ -356,7 +366,7 @@ Entry → BeforeTimers → BeforeSources → **Source0** → **DoBlocks** → Be
 
 ### Q6：RunLoop Source0 为什么需要手动唤醒？Source1 为什么不需要？
 
-- **Source0**：应用层事件，**不绑定 mach_port**。`CFRunLoopSourceSignal` 只是把 source 标为 pending；若 RunLoop 正在 ⑦ 步 `mach_msg` 睡眠，**必须 `CFRunLoopWakeUp`** 才能让它醒来进入 ④ 步处理。
+- **Source0**：应用层事件，**不绑定 mach_port**。`CFRunLoopSourceSignal` 只是把 source 标为 pending；若 RunLoop 正在 ⑦ 步 `mach_msg` 睡眠，**必须** `CFRunLoopWakeUp` 才能让它醒来进入 ④ 步处理。
 - **Source1**：基于 **mach_port**。内核 `mach_msg` 投递到 port → 正在等待的 RunLoop **自动被唤醒**，无需应用层 WakeUp。
 
 **反例（面试追问）**：只 Signal 不 WakeUp → RunLoop 可能 **睡到下一个 Timer/port 事件** 才处理 Source0，**延迟明显**。
@@ -365,12 +375,14 @@ Entry → BeforeTimers → BeforeSources → **Source0** → **DoBlocks** → Be
 
 ### Q7：RunLoop 中 `performSelector:withObject:afterDelay:`、`dispatch_async(main_queue)`、`mach_msg` 属于哪种 Source 或机制？
 
-| API | 底层机制 | 在循环哪一步执行 |
-|-----|---------|----------------|
-| `performSelector:afterDelay:` | 创建 **CFRunLoopTimer**（**不是 Source**） | ② Timer 阶段 / ⑨ Timer 回调 |
-| `dispatch_async(main_queue)` | **dispatch source + block 链表** | ⑤ **__CFRunLoopDoBlocks** |
-| `mach_msg` 收到的端口消息 | **Source1** | ⑨ 唤醒后处理 port |
-| `performSelectorOnMainThread` | 向主 RunLoop 注册 **Source0** + Signal + WakeUp | ④ Source0 |
+
+| API                           | 底层机制                                        | 在循环哪一步执行                  |
+| ----------------------------- | ------------------------------------------- | ------------------------- |
+| `performSelector:afterDelay:` | 创建 **CFRunLoopTimer**（**不是 Source**）        | ② Timer 阶段 / ⑨ Timer 回调   |
+| `dispatch_async(main_queue)`  | **dispatch source + block 链表**              | ⑤ **__CFRunLoopDoBlocks** |
+| `mach_msg` 收到的端口消息            | **Source1**                                 | ⑨ 唤醒后处理 port              |
+| `performSelectorOnMainThread` | 向主 RunLoop 注册 **Source0** + Signal + WakeUp | ④ Source0                 |
+
 
 ---
 
@@ -389,7 +401,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
 
 **卡顿监控（重点）**：
 
-- 方案 A：Observer 记录 **`BeforeSources` → `AfterWaiting`** 时间差 → 表示 **一轮事件处理（含 Source0/Blocks/Source1/Timer）耗时**
+- 方案 A：Observer 记录 `BeforeSources` **→** `AfterWaiting` 时间差 → 表示 **一轮事件处理（含 Source0/Blocks/Source1/Timer）耗时**
 - 方案 B：子线程定时 **Ping 主线程**（`dispatch_semaphore` / CFRunLoopPerformBlock），超时未回应 → 主线程卡死
 
 阈值常见 **50ms**（3 帧 @60fps）。注意 Observer 回调里 **不要做重活**，否则误报。
@@ -409,7 +421,7 @@ CFRunLoopRef CFRunLoopGetCurrent(void) {
 }
 ```
 
-`[runLoop run]` 内部检查 **`__CFRunLoopModeIsEmpty`**：若当前 Mode 下 **无 Source1/Timer/Port** → **立即 return**，看起来像「run 了一下就退出了」。
+`[runLoop run]` 内部检查 `__CFRunLoopModeIsEmpty`：若当前 Mode 下 **无 Source1/Timer/Port** → **立即 return**，看起来像「run 了一下就退出了」。
 
 **常驻线程标准写法**：
 
@@ -435,8 +447,8 @@ CFRunLoopRef CFRunLoopGetCurrent(void) {
 `CFRunLoopStop(runLoop)`：
 
 1. 设置 `runLoop->_stopped = true`
-2. 调用 **`CFRunLoopWakeUp(runLoop)`**（wake port 发消息）
-3. RunLoop 在 ⑦/⑨ 后检查 `_stopped` → 跳出循环 → **`kCFRunLoopExit`** → `[runLoop run]` 返回
+2. 调用 `CFRunLoopWakeUp(runLoop)`（wake port 发消息）
+3. RunLoop 在 ⑦/⑨ 后检查 `_stopped` → 跳出循环 → `kCFRunLoopExit` → `[runLoop run]` 返回
 
 **注意（重点）**：`CFRunLoopStop` **必须在目标线程** 的 RunLoop 上调用（`performSelector:onThread:` 派过去），否则 **竞态/无效**。
 
@@ -444,13 +456,15 @@ CFRunLoopRef CFRunLoopGetCurrent(void) {
 
 ### Q11：CADisplayLink 和 NSTimer 底层区别？
 
-| | NSTimer | CADisplayLink |
-|--|---------|---------------|
-| 底层 | **CFRunLoopTimerRef**，`mach_absolute_time` | **CVDisplayLink**（CoreVideo），与 **VSync** 同步 |
-| 触发时机 | 设定 fireDate 到达 | **每次屏幕刷新**（约 60/120Hz） |
-| 精度 | 受 RunLoop Mode、主线程阻塞影响，**不精确** | 与 VSync 对齐，**适合动画** |
-| Mode | 滑动 UITracking 下 Default 的 Timer 停 | 同样受 Mode 影响，需 **CommonModes** |
-| 循环引用 | Timer → target（常见泄漏） | displayLink → target |
+
+|      | NSTimer                                    | CADisplayLink                               |
+| ---- | ------------------------------------------ | ------------------------------------------- |
+| 底层   | **CFRunLoopTimerRef**，`mach_absolute_time` | **CVDisplayLink**（CoreVideo），与 **VSync** 同步 |
+| 触发时机 | 设定 fireDate 到达                             | **每次屏幕刷新**（约 60/120Hz）                      |
+| 精度   | 受 RunLoop Mode、主线程阻塞影响，**不精确**             | 与 VSync 对齐，**适合动画**                         |
+| Mode | 滑动 UITracking 下 Default 的 Timer 停          | 同样受 Mode 影响，需 **CommonModes**               |
+| 循环引用 | Timer → target（常见泄漏）                       | displayLink → target                        |
+
 
 ---
 
@@ -487,9 +501,9 @@ void startRunLoopMonitor(void) {
 
 ### Q13：RunLoop 的 `_commonModes` 和 `_commonModeItems` 是什么关系？
 
-- **`_commonModes`**：`CFMutableSetRef`，存 **Mode 名称**（默认含 Default + UITracking）
-- **`_commonModeItems`**：挂到 CommonModes 的 **Source/Timer/Observer 集合**
-- 新 item 以 CommonModes 注册 → 加入 `_commonModeItems`，并 **同步到 `_commonModes` 里已有每个 Mode**
+- `_commonModes`：`CFMutableSetRef`，存 **Mode 名称**（默认含 Default + UITracking）
+- `_commonModeItems`：挂到 CommonModes 下的 **Source/Timer/Observer 集合**
+- 新 item 以 CommonModes 注册 → 加入 `_commonModeItems`，并 **同步到** `_commonModes` **里已有每个 Mode**
 - 之后若系统往 `_commonModes` **新增 Mode 名**，`_commonModeItems` 里的 item **自动同步过去**
 
 ---
@@ -498,7 +512,7 @@ void startRunLoopMonitor(void) {
 
 源码 `__CFRunLoopSetSleepTime` 记录 **进入 mach_msg 的时刻**，用途：
 
-1. **`AfterWaiting`** 时用 `now - _sleepTime` 算 **实际休眠时长**
+1. `AfterWaiting` 时用 `now - _sleepTime` 算 **实际休眠时长**
 2. 卡顿/ watchdog 分析：区分 **「真在处理事件」** vs **「睡太久没醒」**
 3. 调试 RunLoop 阻塞
 
@@ -523,7 +537,7 @@ void startRunLoopMonitor(void) {
 
 ### Q16：`CFRunLoopTimerRef` 的时间精度如何保证？为什么有时不准确？
 
-CFRunLoopTimer 基于 **`mach_absolute_time`** + `mach_timebase_info` 转纳秒；fireDate 与 **当前 Mode 的 Timer 数组** 比较。
+CFRunLoopTimer 基于 `mach_absolute_time` + `mach_timebase_info` 转纳秒；fireDate 与 **当前 Mode 的 Timer 数组** 比较。
 
 **不准的三大原因（重点）**：
 
@@ -542,14 +556,16 @@ if (timer->fireDate <= now && mode->_timers contains timer) {
 
 ### Q17：`[runLoop run]`、`runMode:beforeDate:`、`CFRunLoopRunInMode` 有什么区别？
 
-| API | 行为 |
-|-----|------|
-| `[runLoop run]` | 等价 `CFRunLoopRunInMode(Default, distantFuture, false)`，**永不超时** |
-| `runMode:beforeDate:` | 跑 **指定 Mode**，到 **date 或事件** 返回；可 **`while + runMode` 实现可控退出** |
-| `CFRunLoopRunInMode(mode, seconds, returnAfterSourceHandled)` | C 层；第三参 `true` 时 **处理完一个 Source 就 return**（少见） |
+
+| API                                                           | 行为                                                              |
+| ------------------------------------------------------------- | --------------------------------------------------------------- |
+| `[runLoop run]`                                               | 等价 `CFRunLoopRunInMode(Default, distantFuture, false)`，**永不超时** |
+| `runMode:beforeDate:`                                         | 跑 **指定 Mode**，到 **date 或事件** 返回；可 `while + runMode` **实现可控退出**  |
+| `CFRunLoopRunInMode(mode, seconds, returnAfterSourceHandled)` | C 层；第三参 `true` 时 **处理完一个 Source 就 return**（少见）                  |
+
 
 **线程保活常用**：`while (!stopped) { [runLoop runMode:NSDefaultRunLoopMode beforeDate:distantFuture]; }`  
-配合 **`CFRunLoopStop`** 在目标线程退出循环。详见 [第五章 §5.8](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)。
+配合 `CFRunLoopStop` 在目标线程退出循环。详见 [第五章 §5.8](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html)。
 
 ---
 
@@ -604,15 +620,17 @@ CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
 });
 ```
 
-**路径**：block 挂到 RunLoop **`_blocks` 链表** → **`CFRunLoopWakeUp`** → ⑤ **`__CFRunLoopDoBlocks`** 执行。
+**路径**：block 挂到 RunLoop `_blocks` **链表** → `CFRunLoopWakeUp` → ⑤ `__CFRunLoopDoBlocks` 执行。
 
 `performSelectorOnMainThread`：创建 **Source0** → `Signal` + `WakeUp` → ④ **Source0** 阶段执行 selector。
 
-| | performSelectorOnMainThread | dispatch_async(main) | CFRunLoopPerformBlock |
-|--|----------------------------|----------------------|------------------------|
-| 机制 | Source0 | dispatch source + blocks | blocks 链表 |
-| 执行阶段 | ④ Source0 | ⑤ DoBlocks | ⑤ DoBlocks |
-| 典型场景 | 老 API | **GCD 首选** | CF 层 / 底层库 |
+
+|      | performSelectorOnMainThread | dispatch_async(main)     | CFRunLoopPerformBlock |
+| ---- | --------------------------- | ------------------------ | --------------------- |
+| 机制   | Source0                     | dispatch source + blocks | blocks 链表             |
+| 执行阶段 | ④ Source0                   | ⑤ DoBlocks               | ⑤ DoBlocks            |
+| 典型场景 | 老 API                       | **GCD 首选**               | CF 层 / 底层库            |
+
 
 三者都 **依赖主 RunLoop**；主线程卡顿时 **全部排队**。
 
@@ -659,8 +677,8 @@ CFRunLoopRun()   // 永不返回，直到 App 退出
 CFRunLoopObserverCreate(allocator, activities, repeats, order, callout, context);
 ```
 
-- **`repeats = true`**：每个 Activity 每次出现都回调（卡顿监控必须 true）
-- **`repeats = false`**：对应 Activity **只回调一次**，常用于 **单次** Entry/Exit 钩子
+- `repeats = true`：每个 Activity 每次出现都回调（卡顿监控必须 true）
+- `repeats = false`：对应 Activity **只回调一次**，常用于 **单次** Entry/Exit 钩子
 
 ---
 
@@ -698,13 +716,3 @@ NSPort *port = [NSPort port];
 
 ---
 
-## 8.10 关联参考
-
-| 主题 | 参考 |
-|------|------|
-| 常驻线程 / 线程保活 | [第五章 §5.8](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html) |
-| GCD 与 RunLoop 结合 | [第五章 §5.3](/posts/%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1.html) |
-| 触摸事件链 | [Common/06](/posts/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E9%93%BEhit-testing.html) |
-| 卡顿监控 | [Common/09 §10.1](/posts/%E7%AC%AC%E4%B9%9D%E7%AB%A0%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E-uikit%E5%A4%A7%E5%8E%82%E9%AB%98%E9%A2%91-%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html) |
-| GIF 滑动卡顿（RunLoop Mode） | [Common/09 §10.7](/posts/%E7%AC%AC%E4%B9%9D%E7%AB%A0%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E-uikit%E5%A4%A7%E5%8E%82%E9%AB%98%E9%A2%91-%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html) |
-| 大厂考频统计 | [大厂面试题/06-高频考点TOP50](/posts/%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9-top-50%E8%B7%A8%E5%85%AC%E5%8F%B8%E7%BB%9F%E8%AE%A1.html) |
